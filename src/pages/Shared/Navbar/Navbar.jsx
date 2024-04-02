@@ -4,12 +4,14 @@ import { Link, NavLink } from "react-router-dom";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { AwesomeButton } from 'react-awesome-button';
 import 'react-awesome-button/dist/styles.css';
+import '../../../../src/App.css'
+import { auth } from "../../../firebase/firebase.config";
 
 const Navbar = () => {
 
     let user = false;
 
-
+    console.log("auth" ,auth);
 
     const navLink = <>
         <li>
@@ -115,7 +117,7 @@ const Navbar = () => {
                         <AwesomeButton
                             onPress={() => console.log('hello')}
                             type="secondary"
-                            
+                            className="aws-btn"
                         >Join US</AwesomeButton>
 
                 }

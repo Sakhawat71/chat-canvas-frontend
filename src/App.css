@@ -1,0 +1,12 @@
+.aws-btn {
+
+    --button-default-height: 50px;
+    --button-horizontal-padding: 20px;
+
+    --button-secondary-color: #fbfbfb;
+    --button-secondary-color-dark: #3a3a3a;
+    --button-secondary-color-light: #3a3a3a;
+    --button-secondary-color-hover: #eeeeee;
+    --button-secondary-color-active: #e2e2e2;
+    --button-secondary-border: 2px solid #3a3a3a;
+}
