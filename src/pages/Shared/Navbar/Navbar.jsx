@@ -2,10 +2,12 @@ import { RiMenu2Line } from "react-icons/ri";
 import logo from "../../../assets/canvas-logo.png"
 import { Link, NavLink } from "react-router-dom";
 import { IoMdNotificationsOutline } from "react-icons/io";
+import { AwesomeButton } from 'react-awesome-button';
+import 'react-awesome-button/dist/styles.css';
 
 const Navbar = () => {
 
-    let user = true;
+    let user = false;
 
 
 
@@ -43,7 +45,7 @@ const Navbar = () => {
 
 
     return (
-        <div className="navbar bg-base-100">
+        <div className="navbar bg-base-300 pr-5 md:pr-5 lg:px-10 mx-auto">
 
             <div className="navbar-start">
 
@@ -84,25 +86,38 @@ const Navbar = () => {
                 {
                     user
                         ?
-                        <Link>Join US</Link>
-                        :
                         <div className="dropdown dropdown-end ">
 
                             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                                 <div className="w-10 rounded-full">
-                                    <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    <img alt="User Profile Image" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
                                 </div>
                             </div>
 
-                            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                                <li>
-                                    Profile
+                            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-xl space-y-2">
+
+                                <li className="px-3">
+                                    Profile Name
                                 </li>
-                                <li><a>Settings</a></li>
-                                <li><a>Logout</a></li>
+
+                                <li className="hover:font-bold">
+                                    <Link to="/dashboard">Dashboard</Link>
+                                </li>
+
+                                <li className="hover:font-bold">
+                                    <button>Logout</button>
+                                </li>
                             </ul>
 
                         </div>
+                        :
+                        // <Link className="btn btn-outline text-base hover:bg-base-300 hover:text-[#ED8C4A] hover:border-[#ED8C4A]">Join US</Link>
+                        <AwesomeButton
+                            onPress={() => console.log('hello')}
+                            type="secondary"
+                            
+                        >Join US</AwesomeButton>
+
                 }
 
             </div>
