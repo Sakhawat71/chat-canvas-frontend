@@ -4,6 +4,10 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import regiBg from "../../../assets/sign/bg.svg"
 import regiImage from "../../../assets/sign/regi.png"
+import axios from "axios";
+
+const imgbb_api_key = import.meta.env.VITE_IMGBB_API_KEY;
+const image_hosting_url = `https://api.imgbb.com/1/upload?key=${imgbb_api_key}`;
 
 const Register = () => {
 
@@ -15,20 +19,28 @@ const Register = () => {
         formState: { errors },
     } = useForm()
 
-    const handelSignUp = info => {
+    const handelSignUp = async (info) => {
 
-        // const photo = e.target.photo.value;
-        console.log(info.photo[0]?.name );
-        console.log(info.photo.length );
+        let photoLink = 'https://i.ibb.co/4K27t1f/user.png';
 
-        if(info.photo.length){
-            console.log('yes',info.photo.length);
+        if (info.photo.length) {
 
-            
+            const imageFile = { 'image': info.photo[0] };
+            console.log(imageFile);
+
+            const res = await axios.post(image_hosting_url, imageFile, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+
+            console.log(res);
+
         }
-        else{
-            console.log('else',info.photo.length);
+        else {
+            console.log(photoLink);
         }
+
 
     }
 
@@ -56,7 +68,7 @@ const Register = () => {
                     className="card w-full lg:w-1/2 max-w-sm h-full"
                 >
 
-                    <h1 className="text-3xl font-bold text-center">Sign Up</h1>
+                    <h1 className="text-3xl font-bold text-center uppercase">Sign Up</h1>
 
                     <form
                         onSubmit={handleSubmit(handelSignUp)}
