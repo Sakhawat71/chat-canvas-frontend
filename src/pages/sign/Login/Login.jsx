@@ -16,7 +16,7 @@ const Login = () => {
         formState: { errors },
     } = useForm()
 
-    const getLoginData = info => {
+    const hendelSignIn = info => {
         console.log(info);
     }
 
@@ -26,7 +26,7 @@ const Login = () => {
 
         <div
             className="hero min-h-screen bg-base-200  bg-cover"
-            style={{ backgroundImage: `url(${loginBg})`}}
+            style={{ backgroundImage: `url(${loginBg})` }}
         >
 
             <div className="hero-content flex-col lg:flex-row shadow-2xl my-10  mx-20 w-10/12 py-20">
@@ -48,7 +48,7 @@ const Login = () => {
                     <h1 className="text-3xl font-bold text-center">Login</h1>
 
                     <form
-                        onSubmit={handleSubmit(getLoginData)}
+                        onSubmit={handleSubmit(hendelSignIn)}
                         className="card-body pt-0 pb-5 "
                     >
 
@@ -87,7 +87,7 @@ const Login = () => {
                                 })}
                             />
                             <span
-                                // onClick={handleTogglePassword}
+                                onClick={() => setShowPassword(!showPassword)}
                                 className="absolute bottom-4 right-4 text-xl"
                             >
                                 {
@@ -95,6 +95,9 @@ const Login = () => {
                                 }
                             </span>
 
+                            <label className="label disabled">
+                                <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                            </label>
                         </div>
 
                         {errors.password?.type === "required" && <span className="text-red-600 ">Password is required</span>}
@@ -107,7 +110,7 @@ const Login = () => {
                         {/* <div>
                             <link>forget password</link>
                         </div> */}
-                            
+
                         <div className="form-control">
                             <input
                                 type="submit"
