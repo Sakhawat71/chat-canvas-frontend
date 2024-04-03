@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import loginImage from "../../../assets/sign/bgpic.png";
+import loginImage from "../../../assets/sign/extraLogin.png";
 import loginBg from "../../../assets/sign/bg.svg";
 
 const Login = () => {
@@ -95,9 +95,6 @@ const Login = () => {
                                 }
                             </span>
 
-                            <label className="label disabled">
-                                <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
-                            </label>
                         </div>
 
                         {errors.password?.type === "required" && <span className="text-red-600 ">Password is required</span>}
@@ -107,9 +104,11 @@ const Login = () => {
 
                         {/* ---------------- forget password --------------- */}
 
-                        {/* <div>
-                            <link>forget password</link>
-                        </div> */}
+                        <label className="label disabled">
+                            <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                        </label>
+
+                        {/* ********* submit button ********* */}
 
                         <div className="form-control">
                             <input
@@ -125,7 +124,7 @@ const Login = () => {
                             className="text-[#D1A054] text-base"
                         >New here? <Link
                             to="/register"
-                            className="font-bold"
+                            className="font-bold hover:text-[#1C2E34]"
                         >Create a New Account</Link> </span>
                     </div>
 

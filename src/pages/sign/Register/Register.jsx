@@ -2,32 +2,45 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import regiBg from "../../../assets/sign/bglogin.jpg"
+import regiBg from "../../../assets/sign/bg.svg"
 import regiImage from "../../../assets/sign/regi.png"
 
 const Register = () => {
 
-    const [showPassword,setShowPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
 
     const {
         handleSubmit,
         register,
-        formState : {errors},
+        formState: { errors },
     } = useForm()
 
-    const handelSignUp = e => {
-        console.log(e);
+    const handelSignUp = info => {
+
+        // const photo = e.target.photo.value;
+        console.log(info.photo[0]?.name );
+        console.log(info.photo.length );
+
+        if(info.photo.length){
+            console.log('yes',info.photo.length);
+
+            
+        }
+        else{
+            console.log('else',info.photo.length);
+        }
+
     }
 
 
 
     return (
         <div
-            className="hero min-h-screen bg-base-200  bg-cover"
+            className="hero bg-base-200 "
             style={{ backgroundImage: `url(${regiBg})` }}
         >
 
-            <div className="hero-content flex-col lg:flex-row shadow-2xl my-10  mx-20 w-10/12 py-20">
+            <div className="hero-content flex-col lg:flex-row shadow-2xl my-10  md:mx-20 w-10/12 ">
 
                 <div className="text-center lg:w-1/2 hidden lg:block">
                     <figure className=" flex justify-center">
@@ -43,12 +56,43 @@ const Register = () => {
                     className="card w-full lg:w-1/2 max-w-sm h-full"
                 >
 
-                    <h1 className="text-3xl font-bold text-center">Login</h1>
+                    <h1 className="text-3xl font-bold text-center">Sign Up</h1>
 
                     <form
                         onSubmit={handleSubmit(handelSignUp)}
                         className="card-body pt-0 pb-5 "
                     >
+                        {/* ****************** Name ************** */}
+
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text text-base font-semibold">Name</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                name="name"
+                                placeholder="name"
+                                className="input input-bordered"
+                                {...register("name", { required: true })}
+                            />
+                            {errors.email && <span className="text-red-600"> Name is required</span>}
+                        </div>
+
+                        {/* *********** Photo *********** */}
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text text-base font-semibold">Photo</span>
+                            </label>
+
+                            <input
+                                name="photo"
+                                type="file"
+                                className="file-input file-input-bordered w-full max-w-xs"
+                                {...register("photo")}
+                            />
+                            {/* {errors.email && <span className="text-red-600"> Photo is required</span>} */}
+                        </div>
 
                         {/* ----- Email Input -------- */}
                         <div className="form-control">
@@ -93,9 +137,6 @@ const Register = () => {
                                 }
                             </span>
 
-                            <label className="label disabled">
-                                <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
-                            </label>
                         </div>
 
                         {errors.password?.type === "required" && <span className="text-red-600 ">Password is required</span>}
@@ -103,17 +144,11 @@ const Register = () => {
                         {errors.password?.type === "maxLength" && <span className="text-red-600 ">Password must less then 20 characters</span>}
                         {errors.password?.type === "pattern" && <span className="text-red-600 ">Password must contain at least one uppercase letter, lowercase letter and one number</span>}
 
-                        {/* ---------------- forget password --------------- */}
-
-                        {/* <div>
-                            <link>forget password</link>
-                        </div> */}
-
                         <div className="form-control">
                             <input
                                 type="submit"
-                                value="Login"
-                                className="btn text-white bg-[#D1A054B2] hover:bg-[#D1A054B2]"
+                                value="Sign Up"
+                                className="btn text-white bg-[#D1A054B2] hover:bg-[#D1A054B2] bg-gradient-to-r"
                             ></input>
                         </div>
                     </form>
@@ -121,10 +156,10 @@ const Register = () => {
                     <div className="mx-auto ">
                         <span
                             className="text-[#D1A054] text-base"
-                        >New here? <Link
+                        >already registered ? <Link
                             to="/login"
-                            className="font-bold"
-                        >Create a New Account</Link> </span>
+                            className="font-bold hover:text-blue-500"
+                        >Go to Login</Link> </span>
                     </div>
 
                     {/* <SocialSign></SocialSign> */}
