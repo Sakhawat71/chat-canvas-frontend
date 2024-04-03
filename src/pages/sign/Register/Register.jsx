@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import regiBg from "../../../assets/sign/bg.svg"
 import regiImage from "../../../assets/sign/regi.png"
 import axios from "axios";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 const imgbb_api_key = import.meta.env.VITE_IMGBB_API_KEY;
 const image_hosting_url = `https://api.imgbb.com/1/upload?key=${imgbb_api_key}`;
@@ -12,6 +13,8 @@ const image_hosting_url = `https://api.imgbb.com/1/upload?key=${imgbb_api_key}`;
 const Register = () => {
 
     const [showPassword, setShowPassword] = useState(false);
+    const {signUpEmailPass} = useContext(AuthContext)
+
 
     const {
         handleSubmit,
@@ -21,25 +24,34 @@ const Register = () => {
 
     const handelSignUp = async (info) => {
 
-        let photoLink = 'https://i.ibb.co/4K27t1f/user.png';
-
+        // Image upload is not mandatory during SignUp    
+        let photoLink;
         if (info.photo.length) {
 
             const imageFile = { 'image': info.photo[0] };
-            console.log(imageFile);
 
             const res = await axios.post(image_hosting_url, imageFile, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
             })
-
-            console.log(res);
-
+            if (res.data.success) {
+                photoLink = res.data.data.display_url;
+            }
         }
         else {
-            console.log(photoLink);
+            photoLink = 'https://i.ibb.co/4K27t1f/user.png';
         }
+
+        const name = info.name;
+        const email = info.email;
+        const password = info.password;
+
+        signUpEmailPass(email,password)
+        .then(res => {
+            console.log(res);
+        })
+        .catch(error => console.log(' signup error: ',error))
 
 
     }
