@@ -5,13 +5,11 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import { AwesomeButton } from 'react-awesome-button';
 import 'react-awesome-button/dist/styles.css';
 import '../../../../src/App.css'
-import { auth } from "../../../firebase/firebase.config";
 
 const Navbar = () => {
 
     let user = false;
 
-    console.log("auth" ,auth);
 
     const navLink = <>
         <li>
@@ -113,12 +111,14 @@ const Navbar = () => {
 
                         </div>
                         :
-                        // <Link className="btn btn-outline text-base hover:bg-base-300 hover:text-[#ED8C4A] hover:border-[#ED8C4A]">Join US</Link>
-                        <AwesomeButton
-                            onPress={() => console.log('hello')}
-                            type="secondary"
-                            className="aws-btn"
-                        >Join US</AwesomeButton>
+                        
+                        <Link to={'/login'}>
+                            <AwesomeButton
+                                type="secondary"
+                                className="aws-btn"
+                            >Join US</AwesomeButton>
+                        </Link>
+
 
                 }
 
