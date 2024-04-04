@@ -9,7 +9,6 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState('');
     const [loading, setLaoding] = useState(true);
 
-    console.log('auth in provider',auth);
 
 
     // sign up with email password
@@ -37,7 +36,6 @@ const AuthProvider = ({ children }) => {
         }
     }, [])
 
-    console.log('user info in authProvider ', user);
 
     const authInfo = {
         signUpEmailPass,

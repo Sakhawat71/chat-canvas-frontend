@@ -6,6 +6,7 @@ import regiBg from "../../../assets/sign/bg.svg"
 import regiImage from "../../../assets/sign/regi.png"
 import axios from "axios";
 import { AuthContext } from "../../../providers/AuthProvider";
+import { updateProfile } from "firebase/auth";
 
 const imgbb_api_key = import.meta.env.VITE_IMGBB_API_KEY;
 const image_hosting_url = `https://api.imgbb.com/1/upload?key=${imgbb_api_key}`;
@@ -13,7 +14,7 @@ const image_hosting_url = `https://api.imgbb.com/1/upload?key=${imgbb_api_key}`;
 const Register = () => {
 
     const [showPassword, setShowPassword] = useState(false);
-    const {signUpEmailPass} = useContext(AuthContext)
+    const { signUpEmailPass } = useContext(AuthContext)
 
 
     const {
@@ -47,11 +48,24 @@ const Register = () => {
         const email = info.email;
         const password = info.password;
 
-        signUpEmailPass(email,password)
-        .then(res => {
-            console.log(res);
-        })
-        .catch(error => console.log(' signup error: ',error))
+        console.log("photo link :", photoLink);
+
+        signUpEmailPass(email, password)
+            .then(res => {
+                console.log('user details: ', res.user);
+                const currentUser = res.user;
+                if (currentUser) {
+                    updateProfile(currentUser, {
+                        displayName: name,
+                        photoURL: photoLink
+                    })
+                        .then(() => {
+                            console.log('update profile');
+                        })
+                        .catch(error => console.log('cant update profile: ', error))
+                }
+            })
+            .catch(error => console.log(' signup error: ', error))
 
 
     }
