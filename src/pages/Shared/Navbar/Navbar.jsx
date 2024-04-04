@@ -5,11 +5,33 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import { AwesomeButton } from 'react-awesome-button';
 import 'react-awesome-button/dist/styles.css';
 import '../../../../src/App.css'
+import { useContext } from "react";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 const Navbar = () => {
 
-    let user = false;
+    const {
+        user,
+        loading,
+        logout,
+        setLaoding
+    } = useContext(AuthContext);
 
+
+    const handelLogOut = () => {
+        setLaoding(true);
+        logout()
+            .then(() => {
+                console.log('user logout');
+            })
+            .catch(error => console.log('log out error :', error))
+    }
+
+
+    // if (loading) {
+    //     return <span className="loading loading-bars loading-lg"></span>
+    // }
+    console.log(loading);
 
     const navLink = <>
         <li>
@@ -84,20 +106,20 @@ const Navbar = () => {
             <div className="navbar-end">
 
                 {
-                    user
+                    user?.email
                         ?
                         <div className="dropdown dropdown-end ">
 
-                            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                                <div className="w-10 rounded-full">
-                                    <img alt="User Profile Image" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar border-black border">
+                                <div className="w-24 rounded-full">
+                                    <img alt="User Profile Image" src={user?.photoURL} />
                                 </div>
                             </div>
 
                             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-xl space-y-2">
 
                                 <li className="px-3">
-                                    Profile Name
+                                    {user?.displayName}
                                 </li>
 
                                 <li className="hover:font-bold">
@@ -105,13 +127,13 @@ const Navbar = () => {
                                 </li>
 
                                 <li className="hover:font-bold">
-                                    <button>Logout</button>
+                                    <button onClick={handelLogOut}>Logout</button>
                                 </li>
                             </ul>
 
                         </div>
                         :
-                        
+
                         <Link to={'/login'}>
                             <AwesomeButton
                                 type="secondary"

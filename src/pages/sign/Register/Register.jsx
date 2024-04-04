@@ -1,12 +1,13 @@
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import regiBg from "../../../assets/sign/bg.svg"
 import regiImage from "../../../assets/sign/regi.png"
 import axios from "axios";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { updateProfile } from "firebase/auth";
+import GoogleSignUp from "../../../components/SocialSignUp/GoogleSignUp";
 
 const imgbb_api_key = import.meta.env.VITE_IMGBB_API_KEY;
 const image_hosting_url = `https://api.imgbb.com/1/upload?key=${imgbb_api_key}`;
@@ -14,8 +15,8 @@ const image_hosting_url = `https://api.imgbb.com/1/upload?key=${imgbb_api_key}`;
 const Register = () => {
 
     const [showPassword, setShowPassword] = useState(false);
-    const { signUpEmailPass } = useContext(AuthContext)
-
+    const { signUpEmailPass } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const {
         handleSubmit,
@@ -48,11 +49,11 @@ const Register = () => {
         const email = info.email;
         const password = info.password;
 
-        console.log("photo link :", photoLink);
+        // console.log("photo link :", photoLink);
 
         signUpEmailPass(email, password)
             .then(res => {
-                console.log('user details: ', res.user);
+                // console.log('user details: ', res.user);
                 const currentUser = res.user;
                 if (currentUser) {
                     updateProfile(currentUser, {
@@ -61,6 +62,8 @@ const Register = () => {
                     })
                         .then(() => {
                             console.log('update profile');
+                            navigate('/')
+                            console.log(navigate);
                         })
                         .catch(error => console.log('cant update profile: ', error))
                 }
@@ -200,7 +203,8 @@ const Register = () => {
                         >Go to Login</Link> </span>
                     </div>
 
-                    {/* <SocialSign></SocialSign> */}
+                    <div className="divider">OR</div>
+                    <GoogleSignUp></GoogleSignUp>
                 </div>
             </div>
         </div>

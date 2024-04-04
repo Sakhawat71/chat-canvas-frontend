@@ -1,14 +1,20 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import loginImage from "../../../assets/sign/extraLogin.png";
 import loginBg from "../../../assets/sign/bg.svg";
+import { AuthContext } from "../../../providers/AuthProvider";
+import GoogleSignUp from "../../../components/SocialSignUp/GoogleSignUp";
 
 const Login = () => {
 
     const [showPassword, setShowPassword] = useState(false);
+    const { SignInEmailPass } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
 
+    console.log("location ", location);
 
     const {
         handleSubmit,
@@ -17,7 +23,22 @@ const Login = () => {
     } = useForm()
 
     const hendelSignIn = info => {
-        console.log(info);
+        // console.log(info);
+
+        const email = info.email;
+        const password = info.password;
+
+        SignInEmailPass(email, password)
+            .then(res => {
+                const loggedUser = res.user;
+                console.log('loggedUser : ',loggedUser);
+                navigate("/")
+                console.log('navigate', navigate);
+            })
+            .catch(error => console.log('cant login :', error))
+
+        // console.log(email, password);
+
     }
 
 
@@ -45,7 +66,7 @@ const Login = () => {
                     className="card w-full lg:w-1/2 max-w-sm h-full"
                 >
 
-                    <h1 className="text-3xl font-bold text-center">Login</h1>
+                    <h1 className="text-3xl font-bold text-center uppercase">Login</h1>
 
                     <form
                         onSubmit={handleSubmit(hendelSignIn)}
@@ -128,7 +149,9 @@ const Login = () => {
                         >Create a New Account</Link> </span>
                     </div>
 
-                    {/* <SocialSign></SocialSign> */}
+                    <div className="divider">OR</div>
+                    <GoogleSignUp></GoogleSignUp>
+
                 </div>
             </div>
         </div>
