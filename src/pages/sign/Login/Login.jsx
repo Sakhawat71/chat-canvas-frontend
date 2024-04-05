@@ -16,6 +16,7 @@ const Login = () => {
 
     console.log("location ", location);
 
+
     const {
         handleSubmit,
         register,
@@ -33,7 +34,6 @@ const Login = () => {
                 const loggedUser = res.user;
                 console.log('loggedUser : ',loggedUser);
                 navigate("/")
-                console.log('navigate', navigate);
             })
             .catch(error => console.log('cant login :', error))
 
