@@ -13,13 +13,12 @@ const Navbar = () => {
     const {
         user,
         logout,
-        loading,
-        setLaoding
+        // loading,
+        // setLaoding
     } = useContext(AuthContext);
 
 
     const handelLogOut = () => {
-        // setLaoding(true);
         logout()
             .then(() => {
                 console.log('user logout');
@@ -28,12 +27,12 @@ const Navbar = () => {
     }
 
 
-    if (loading) {
-        return <span className="loading loading-bars loading-lg"></span>
-    }
-    if(user){
-        setLaoding(false)
-    }
+    // if (loading) {
+    //     return <span className="loading loading-bars loading-lg"></span>
+    // }
+    // if(user){
+    //     setLaoding(false)
+    // }
 
     const navLink = <>
         <li>
