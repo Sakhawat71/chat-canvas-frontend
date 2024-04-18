@@ -103,7 +103,7 @@ const Navbar = () => {
             </div>
 
 
-            {/*  */}
+            {/* user => Profile or login */}
             <div className="navbar-end">
 
                 {
@@ -141,8 +141,6 @@ const Navbar = () => {
                                 className="aws-btn"
                             >Join US</AwesomeButton>
                         </Link>
-
-
                 }
 
             </div>
