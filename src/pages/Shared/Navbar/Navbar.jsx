@@ -55,7 +55,7 @@ const Navbar = () => {
 
         <li >
             <NavLink
-                to="/n"
+                // to="#"
                 className="btn lg:btn-sm btn-ghost btn-circle"
             >
                 <IoMdNotificationsOutline className="text-2xl mt-1" />
