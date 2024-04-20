@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import { auth } from '../firebase/firebase.config';
 import { createContext, useEffect, useState } from 'react';
 import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
-import { SaveUser } from '../utilities/api/saveuserdb';
 
 export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
@@ -43,15 +42,9 @@ const AuthProvider = ({ children }) => {
             setUser(currentUser);
             setLaoding(false);
 
-
-
-            const dbRes = SaveUser(currentUser)
-            console.log('reutrn user data' ,dbRes);
-        
-        
         })
         return () => {
-           return unsubscribe();
+            return unsubscribe();
         }
     }, [])
 

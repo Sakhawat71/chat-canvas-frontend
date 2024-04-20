@@ -8,6 +8,7 @@ import axios from "axios";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import GoogleSignUp from "../../../components/SocialSignUp/GoogleSignUp";
+import { SaveUser } from "../../../utilities/api/saveuserdb";
 
 const imgbb_api_key = import.meta.env.VITE_IMGBB_API_KEY;
 const image_hosting_url = `https://api.imgbb.com/1/upload?key=${imgbb_api_key}`;
@@ -60,9 +61,12 @@ const Register = () => {
                         displayName: name,
                         photoURL: photoLink
                     })
-                        .then(() => {
+                        .then(async () => {
                             console.log('update profile');
                             navigate('/')
+
+                            const dbResponse = await SaveUser(currentUser);
+                            console.log('dbResponse : ',dbResponse);
                             console.log(navigate);
                         })
                         .catch(error => console.log('cant update profile: ', error))
