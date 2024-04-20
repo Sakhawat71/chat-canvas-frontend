@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AwesomeButton } from "react-awesome-button";
 import { FcGoogle } from "react-icons/fc";
 import { SaveUser } from "../../utilities/api/saveuserdb";
+import toast from "react-hot-toast";
 
 const GoogleSignUp = () => {
 
@@ -16,10 +17,16 @@ const GoogleSignUp = () => {
                 const user = res.user;
                 navigate('/')
 
-
-                console.log('google sign up : ', user);
                 const dbRes = await SaveUser(user)
-                console.log(" dbResponse : ", dbRes);
+                if(dbRes.exist) {
+                    toast.success(`Welcome Back, ${user?.displayName}`)
+                }
+
+                if(dbRes.upsertedCount){
+                    toast.success(`Welcome to ChatCanvas, ${user?.displayName}`)
+                }
+
+                // console.log(" dbResponse : ", dbRes);
 
             })
             .catch(error => console.log('Google signup error : ', error))

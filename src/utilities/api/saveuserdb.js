@@ -15,9 +15,9 @@ export const SaveUser = async user => {
         role: 'user',
         totalPost: 0,
     }
-    console.log(currentUser);
+    // console.log(currentUser);
     const { data } = await axiosSecure.put(`/api/v1/add-user/${user?.email}`,currentUser)
-    console.log('inside saveuserdb : ',data);
+    // console.log('inside saveuserdb : ',data);
     return data;
 
 }

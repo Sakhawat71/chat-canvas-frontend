@@ -6,6 +6,7 @@ import loginImage from "../../../assets/sign/extraLogin.png";
 import loginBg from "../../../assets/sign/bg.svg";
 import { AuthContext } from "../../../providers/AuthProvider";
 import GoogleSignUp from "../../../components/SocialSignUp/GoogleSignUp";
+import toast from "react-hot-toast";
 
 const Login = () => {
 
@@ -24,7 +25,7 @@ const Login = () => {
     } = useForm()
 
     const hendelSignIn = info => {
-        // console.log(info);
+
 
         const email = info.email;
         const password = info.password;
@@ -32,12 +33,12 @@ const Login = () => {
         SignInEmailPass(email, password)
             .then(res => {
                 const loggedUser = res.user;
-                console.log('loggedUser : ',loggedUser);
+                // console.log('loggedUser : ',loggedUser);
                 navigate("/")
+                toast.success(`Welcome Back , ${loggedUser?.displayName}`)
             })
             .catch(error => console.log('cant login :', error))
 
-        // console.log(email, password);
 
     }
 

@@ -9,6 +9,7 @@ import { AuthContext } from "../../../providers/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import GoogleSignUp from "../../../components/SocialSignUp/GoogleSignUp";
 import { SaveUser } from "../../../utilities/api/saveuserdb";
+import toast from "react-hot-toast";
 
 const imgbb_api_key = import.meta.env.VITE_IMGBB_API_KEY;
 const image_hosting_url = `https://api.imgbb.com/1/upload?key=${imgbb_api_key}`;
@@ -62,12 +63,17 @@ const Register = () => {
                         photoURL: photoLink
                     })
                         .then(async () => {
-                            console.log('update profile');
+                            // console.log('update profile');
                             navigate('/')
 
                             const dbResponse = await SaveUser(currentUser);
+
+                            if(dbResponse.upsertedCount){
+                                toast.success(`Welcome to ChatCanvas, ${currentUser?.displayName}`)
+                            }
+
                             console.log('dbResponse : ',dbResponse);
-                            console.log(navigate);
+                            // console.log(navigate);
                         })
                         .catch(error => console.log('cant update profile: ', error))
                 }
