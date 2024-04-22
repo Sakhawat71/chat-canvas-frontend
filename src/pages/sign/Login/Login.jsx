@@ -11,11 +11,11 @@ import toast from "react-hot-toast";
 const Login = () => {
 
     const [showPassword, setShowPassword] = useState(false);
-    const { SignInEmailPass , loading} = useContext(AuthContext);
+    const { SignInEmailPass , loading , user} = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
-
-    console.log("location ", location);
+    const form = location?.state?.from?.pathname;
+    console.log("location ", location,form);
 
     const {
         handleSubmit,
@@ -132,7 +132,7 @@ const Login = () => {
 
                         <div className="form-control">
                             <input
-                                disabled = {loading && true}
+                                disabled = {loading || user && true}
                                 type="submit"
                                 value={loading ? 'loading....' : 'Login'}
                                 className= "btn text-white bg-[#D1A054B2] hover:bg-[#D1A054B2] uppercase "

@@ -133,7 +133,7 @@ const Navbar = () => {
                         </div>
                         :
 
-                        <Link to={'/login'}>
+                        <Link to={loading ? '#' : '/login'} >
                             <AwesomeButton
                                 type="secondary"
                                 className="aws-btn"
