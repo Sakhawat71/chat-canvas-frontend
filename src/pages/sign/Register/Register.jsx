@@ -72,7 +72,7 @@ const Register = () => {
                                 toast.success(`Welcome to ChatCanvas, ${currentUser?.displayName}`)
                             }
 
-                            console.log('dbResponse : ',dbResponse);
+                            // console.log('dbResponse : ',dbResponse);
                             // console.log(navigate);
                         })
                         .catch(error => console.log('cant update profile: ', error))
