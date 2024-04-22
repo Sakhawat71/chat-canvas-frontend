@@ -7,13 +7,16 @@ import 'react-awesome-button/dist/styles.css';
 import '../../../../src/App.css'
 import { useContext } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
+import { ImSpinner6 } from "react-icons/im";
+import { RemoveJwtToken } from "../../../utilities/api/jwtReletedUtilites";
+
 
 const Navbar = () => {
 
     const {
         user,
         logout,
-        // loading,
+        loading,
         // setLaoding
     } = useContext(AuthContext);
 
@@ -21,21 +24,16 @@ const Navbar = () => {
     const handelLogOut = () => {
         logout()
             .then(() => {
+                RemoveJwtToken()
                 console.log('user logout');
             })
             .catch(error => console.log('log out error :', error))
     }
 
 
-    // if (loading) {
-    //     return <span className="loading loading-bars loading-lg"></span>
-    // }
-    // if(user){
-    //     setLaoding(false)
-    // }
 
     const navLink = <>
-        <li>
+        <li >
             <NavLink
                 to="/"
                 className={({ isActive, isPending }) =>
@@ -44,7 +42,7 @@ const Navbar = () => {
             >Home</NavLink>
         </li>
 
-        <li>
+        <li >
             <NavLink
                 to="/membership"
                 className={({ isActive, isPending }) =>
@@ -139,7 +137,8 @@ const Navbar = () => {
                             <AwesomeButton
                                 type="secondary"
                                 className="aws-btn"
-                            >Join US</AwesomeButton>
+                            >{loading ? <ImSpinner6 className="animate-spin" /> : 'Join US'}</AwesomeButton>
+
                         </Link>
                 }
 

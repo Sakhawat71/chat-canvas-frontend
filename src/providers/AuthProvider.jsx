@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { auth } from '../firebase/firebase.config';
 import { createContext, useEffect, useState } from 'react';
 import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from 'firebase/auth';
+import { GetJwtToken } from '../utilities/api/jwtReletedUtilites';
 
 export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
@@ -39,7 +40,12 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             console.log(' user data in auth state change', currentUser);
+            
             setUser(currentUser);
+            if (currentUser) {
+                GetJwtToken({ email: currentUser?.email })
+            }
+
             setLaoding(false);
 
         })

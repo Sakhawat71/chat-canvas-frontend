@@ -17,7 +17,7 @@ const image_hosting_url = `https://api.imgbb.com/1/upload?key=${imgbb_api_key}`;
 const Register = () => {
 
     const [showPassword, setShowPassword] = useState(false);
-    const { signUpEmailPass } = useContext(AuthContext);
+    const { signUpEmailPass ,loading} = useContext(AuthContext);
     const navigate = useNavigate();
 
     const {
@@ -198,8 +198,9 @@ const Register = () => {
                         <div className="form-control">
                             <input
                                 type="submit"
-                                value="Sign Up"
-                                className="btn text-white bg-[#D1A054B2] hover:bg-[#D1A054B2] bg-gradient-to-r"
+                                value={loading ? 'Loading....' : 'Sign Up'}
+                                disabled={loading && true}
+                                className="btn text-white bg-[#D1A054B2] hover:bg-[#D1A054B2] bg-gradient-to-r uppercase"
                             ></input>
                         </div>
                     </form>
