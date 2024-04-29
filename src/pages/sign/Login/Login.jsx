@@ -11,11 +11,12 @@ import toast from "react-hot-toast";
 const Login = () => {
 
     const [showPassword, setShowPassword] = useState(false);
-    const { SignInEmailPass , loading , user} = useContext(AuthContext);
+    const [loginError, setLoginError] = useState(true);
+    const { SignInEmailPass, loading, user } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
     const form = location?.state?.from?.pathname;
-    console.log("location ", location,form);
+    console.log("location ", location, form);
 
     const {
         handleSubmit,
@@ -36,7 +37,11 @@ const Login = () => {
                 navigate("/")
                 toast.success(`Welcome Back , ${loggedUser?.displayName}`)
             })
-            .catch(error => console.log('cant login :', error))
+            .catch(error => {
+                console.log('cant login :', error)
+                setLoginError(false)
+                toast.error(error.code.split('/')[1])
+            })
 
     }
 
@@ -132,10 +137,10 @@ const Login = () => {
 
                         <div className="form-control">
                             <input
-                                disabled = {loading || user && true}
+                                disabled={(loading || user) && loginError}
                                 type="submit"
-                                value={loading ? 'loading....' : 'Login'}
-                                className= "btn text-white bg-[#D1A054B2] hover:bg-[#D1A054B2] uppercase "
+                                value={"Login"}
+                                className="btn text-white bg-[#D1A054B2] hover:bg-[#D1A054B2] uppercase "
                             ></input>
                         </div>
                     </form>
