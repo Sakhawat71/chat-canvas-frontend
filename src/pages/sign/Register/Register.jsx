@@ -17,6 +17,7 @@ const image_hosting_url = `https://api.imgbb.com/1/upload?key=${imgbb_api_key}`;
 const Register = () => {
 
     const [showPassword, setShowPassword] = useState(false);
+    const [loginError, setLoginError] = useState(true);
     const { signUpEmailPass ,loading} = useContext(AuthContext);
     const navigate = useNavigate();
 
@@ -78,7 +79,11 @@ const Register = () => {
                         .catch(error => console.log('cant update profile: ', error))
                 }
             })
-            .catch(error => console.log(' signup error: ', error))
+            .catch(error => {
+                console.log(' signup error: ', error)
+                setLoginError(false)
+                toast.error(error.code.split('/')[1])
+            })
 
 
     }
@@ -198,8 +203,8 @@ const Register = () => {
                         <div className="form-control">
                             <input
                                 type="submit"
-                                value={loading ? 'Loading....' : 'Sign Up'}
-                                disabled={loading && true}
+                                value={'Sign Up'}
+                                disabled={(loading && true) && loginError}
                                 className="btn text-white bg-[#D1A054B2] hover:bg-[#D1A054B2] bg-gradient-to-r uppercase"
                             ></input>
                         </div>
