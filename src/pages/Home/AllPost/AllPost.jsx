@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
-const AllPost = props => {
+const AllPost = () => {
     return (
         <div>
             <h2>total posts: 10</h2>
@@ -8,8 +8,8 @@ const AllPost = props => {
     );
 };
 
-AllPost.propTypes = {
+// AllPost.propTypes = {
     
-};
+// };
 
 export default AllPost;

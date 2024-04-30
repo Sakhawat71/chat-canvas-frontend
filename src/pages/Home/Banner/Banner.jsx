@@ -20,13 +20,14 @@ const Banner = () => {
 
     return (
         <div
-            onMouseOut={() => setShowKeyword(false)}
+
             className="navbar bg-base-300 flex-col justify-center">
 
             <form
                 onSubmit={handleSearch}
-                onMouseEnter={() => setShowKeyword(true)}
-
+                onClick={() => setShowKeyword(true)}
+                onBlur={() => setShowKeyword(false)}
+                
                 className="form-control relative mx-auto w-1/2 lg:w-1/3">
 
                 <input
@@ -37,6 +38,7 @@ const Banner = () => {
                 />
 
                 <button
+
                     type="submit"
                     className="btn btn-ghost btn-circle absolute right-0"
                 >

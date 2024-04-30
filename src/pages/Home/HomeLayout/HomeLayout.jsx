@@ -11,10 +11,10 @@ const HomeLayout = () => {
         <div>
             <Banner></Banner>
             <div className="container md:flex mx-auto ">
-                <div className="w-8/12 border">
+                <div className="w-9/12 border">
                     <AllPost></AllPost>
                 </div>
-                <div className="w-4/12 border ">
+                <div className="w-3/12 border ">
                     <Tags></Tags>
                 </div>
             </div>
