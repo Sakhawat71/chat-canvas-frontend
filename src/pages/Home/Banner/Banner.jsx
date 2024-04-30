@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { GrSearch } from "react-icons/gr";
 
 const Banner = () => {
 
+    const [showKeyword, setShowKeyword] = useState(false);
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -11,12 +13,20 @@ const Banner = () => {
 
     };
 
+    // const toggleKeyWord = () => {
+    //     setShowKeyword(!showKeyword)
+    // }
+
 
     return (
-        <div className="navbar bg-base-300 flex-col justify-center">
+        <div
+            onMouseOut={() => setShowKeyword(false)}
+            className="navbar bg-base-300 flex-col justify-center">
 
             <form
                 onSubmit={handleSearch}
+                onMouseEnter={() => setShowKeyword(true)}
+
                 className="form-control relative mx-auto w-1/2 lg:w-1/3">
 
                 <input
@@ -35,7 +45,7 @@ const Banner = () => {
             </form>
 
 
-            <div className="space-x-3 my-2 cursor-pointer">
+            <div className={`space-x-3 my-2 flex cursor-pointer ${showKeyword === true ? 'block' : 'hidden'}`}>
                 <h3>Popular topics: </h3>
                 <p>hello</p>
                 <p>text</p>
