@@ -58,7 +58,7 @@ const Navbar = () => {
             >
                 <IoMdNotificationsOutline className="text-2xl mt-1" />
                 <div className="indicator bottom-7 left-3">
-                    <span className="badge badge-xs badge-primary indicator-item"></span>
+                    <span className="animate-pulse badge badge-xs badge-primary indicator-item"></span>
                 </div>
             </NavLink>
         </li>
