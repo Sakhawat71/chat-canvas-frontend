@@ -4,14 +4,18 @@ import Announcement from "../Announce/Announcement";
 const Posts = () => {
 
     return (
-        <div className="container mx-auto border-4 mt-10">
+        <div className="container mx-auto mt-10">
 
             <Tabs className="flex gap-10">
 
 
-
                 <div className="w-3/4">
-                    <h2 className="text-canvasThem">All Posts</h2>
+
+                    <div className="py-2 ">
+
+                    </div>
+
+                    <h2 className="text-canvasThem text-2xl">All Posts</h2>
                     <TabPanel>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. A, obcaecati?</p>
                     </TabPanel>
@@ -19,24 +23,26 @@ const Posts = () => {
                     <TabPanel>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto exercitationem magni eos consectetur sed ipsum.</p>
                     </TabPanel>
+                    <TabPanel>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto exercitationem magni eos consectetur sed ipsum.Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto exercitationem magni eos consectetur sed ipsum. Iusto exercitationem magni eos consectetur sed ipsum.</p>
+                    </TabPanel>
+                    <TabPanel>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto exercitationem magni eos consectetur sed ipsum. Iusto exercitationem magni eos consectetur sed ipsum.</p>
+                    </TabPanel>
                 </div>
 
-                <div className="w-1/4 border-black border px-4">
-                    <h3 className="text-[#44B584] text-xl">Related Tags</h3>
 
-                    <TabList className='cursor-pointer flex flex-wrap space-x-2'>
+                {/* tag and announceMent section */}
+                <div className="w-1/4 border-[#44B584] border ">
 
-                        <Tab className='hover:bg-lime-200'>Hello</Tab>
-                        
-                        <Tab>Hola</Tab>
-                        <Tab>Hola</Tab>
-                        <Tab>Hola</Tab>
-                        <Tab>Hola</Tab>
-                        <Tab>Hola</Tab>
-                        <Tab>Hola</Tab>
-                        <Tab>Hola</Tab>
-                        <Tab>Hola</Tab>
-                        <Tab>Hola</Tab>
+                    <h3 className="text-black font-semibold text-center text-xl border-b py-3 bg-[#cbffe9] border-[#44B584]">Related Tags</h3>
+
+                    <TabList className='cursor-pointer flex p-4 flex-wrap space-x-2 '>
+
+                        <Tab className='hover:bg-lime-200'>Node.js</Tab>
+                        <Tab>React</Tab>
+                        <Tab>GraphQL</Tab>
+                        <Tab>CSS</Tab>
 
                     </TabList>
 
