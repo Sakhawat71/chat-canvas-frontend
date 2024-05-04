@@ -1,7 +1,20 @@
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import Announcement from "../Announce/Announcement";
+import { useLoaderData } from "react-router-dom";
+import usePost from "../../../hooks/usePost";
+import PostSection from "./PostSection/PostSection";
 
 const Posts = () => {
+
+    const count = useLoaderData();
+    // console.log(count);
+
+    const [posts, refetch] = usePost([]);
+    // console.log(posts);
+
+    const react = posts.filter(p => p.tag === "React")
+    // console.log("react ", react);
+
 
     return (
         <div className="container mx-auto mt-10">
@@ -11,13 +24,19 @@ const Posts = () => {
 
                 <div className="w-3/4">
 
-                    <div className="py-2 ">
-
+                    <div className="py-2 border-2 justify-between bg-gray-100 flex">
+                        <h2 className="text-canvasThem text-2xl">All Posts : {count}</h2>
+                        <button
+                            // onClick={()=> refetch()}
+                            className="btn btn-outline btn-sm">Post</button>
                     </div>
 
-                    <h2 className="text-canvasThem text-2xl">All Posts</h2>
                     <TabPanel>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. A, obcaecati?</p>
+                        <PostSection posts={posts}></PostSection>
+                    </TabPanel>
+
+                    <TabPanel>
+                        <PostSection posts={react}></PostSection>
                     </TabPanel>
 
                     <TabPanel>
@@ -38,7 +57,7 @@ const Posts = () => {
                     <h3 className="text-black font-semibold text-center text-xl border-b py-3 bg-[#cbffe9] border-[#44B584]">Related Tags</h3>
 
                     <TabList className='cursor-pointer flex p-4 flex-wrap space-x-2 '>
-
+                        <Tab>All Posts</Tab>
                         <Tab className='hover:bg-lime-200'>Node.js</Tab>
                         <Tab>React</Tab>
                         <Tab>GraphQL</Tab>

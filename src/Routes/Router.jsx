@@ -15,7 +15,8 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <HomeLayout></HomeLayout>
+                element: <HomeLayout></HomeLayout>,
+                loader: () => fetch(`http://localhost:5000/api/v1/count`)
             },
             {
                 path: "/membership",
