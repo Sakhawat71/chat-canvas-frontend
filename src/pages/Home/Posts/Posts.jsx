@@ -3,6 +3,7 @@ import Announcement from "../Announce/Announcement";
 import { useLoaderData } from "react-router-dom";
 import usePost from "../../../hooks/usePost";
 import PostSection from "./PostSection/PostSection";
+import useAnnounce from "../../../hooks/useAnnounce";
 
 const Posts = () => {
 
@@ -12,8 +13,13 @@ const Posts = () => {
     const [posts, refetch] = usePost([]);
     // console.log(posts);
 
+    refetch()
+
     const react = posts.filter(p => p.tag === "React")
     // console.log("react ", react);
+
+    const [announceData] = useAnnounce([])
+    console.log("ann : ", announceData.count);
 
 
     return (
@@ -65,7 +71,10 @@ const Posts = () => {
 
                     </TabList>
 
-                    <Announcement></Announcement>
+                    {
+                        announceData.count ? <Announcement></Announcement> : <div></div>
+                    }
+                    
 
                 </div>
 
