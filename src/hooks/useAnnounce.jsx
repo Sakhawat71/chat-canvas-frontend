@@ -7,8 +7,8 @@ const useAnnounce = () => {
     const {data: announceData,refetch} = useQuery({
         queryKey: ['announceData'],
         queryFn: async () => {
-            const res =  await axiosPublic.get('/api/v1/announcement')
-            return res.data
+            const res =  await axiosPublic.get('/api/v1/announcement-count');
+            return res.data;
         }
     })
 

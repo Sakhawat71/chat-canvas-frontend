@@ -15,11 +15,11 @@ const Posts = () => {
 
     refetch()
 
-    const react = posts.filter(p => p.tag === "React")
+    const react = posts.filter(p => p.tag === "React");
     // console.log("react ", react);
 
-    const [announceData] = useAnnounce([])
-    console.log("ann : ", announceData.count);
+    const [announceData] = useAnnounce([]);
+    console.log("ann : ", announceData);
 
 
     return (
@@ -72,7 +72,7 @@ const Posts = () => {
                     </TabList>
 
                     {
-                        announceData.count ? <Announcement></Announcement> : <div></div>
+                        announceData ? <Announcement></Announcement> : <div></div>
                     }
                     
 

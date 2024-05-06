@@ -32,7 +32,7 @@ const Navbar = () => {
     }
 
     const [announceData] = useAnnounce([])
-    console.log("ann : ", announceData.count);
+    // console.log("ann : ", announceData);
 
 
     const navLink = <>
@@ -61,7 +61,7 @@ const Navbar = () => {
             >
                 <IoMdNotificationsOutline className="text-2xl mt-1" />
                 {
-                    announceData?.count ? <div className="indicator bottom-7 left-3">
+                    announceData ? <div className="indicator bottom-7 left-3">
                         <span className="animate-pulse badge badge-xs badge-primary indicator-item"></span>
                     </div>
                     :
