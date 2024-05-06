@@ -9,7 +9,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { ImSpinner6 } from "react-icons/im";
 import { RemoveJwtToken } from "../../../utilities/api/jwtReletedUtilites";
-import useAnnounce from "../../../hooks/useAnnounce";
+import useAnnounceCount from "../../../hooks/useAnnounceCount";
 
 
 const Navbar = () => {
@@ -31,9 +31,8 @@ const Navbar = () => {
             .catch(error => console.log('log out error :', error))
     }
 
-    const [announceData] = useAnnounce([])
-    // console.log("ann : ", announceData);
-
+    const [announceCount] = useAnnounceCount(0);
+    // console.log(announceCount);
 
     const navLink = <>
         <li >
@@ -61,7 +60,7 @@ const Navbar = () => {
             >
                 <IoMdNotificationsOutline className="text-2xl mt-1" />
                 {
-                    announceData ? <div className="indicator bottom-7 left-3">
+                    announceCount ? <div className="indicator bottom-7 left-3">
                         <span className="animate-pulse badge badge-xs badge-primary indicator-item"></span>
                     </div>
                     :

@@ -4,10 +4,11 @@ import { useLoaderData } from "react-router-dom";
 import usePost from "../../../hooks/usePost";
 import PostSection from "./PostSection/PostSection";
 import useAnnounce from "../../../hooks/useAnnounce";
+import useAnnounceCount from "../../../hooks/useAnnounceCount";
 
 const Posts = () => {
 
-    const count = useLoaderData();
+    const postCount = useLoaderData();
     // console.log(count);
 
     const [posts, refetch] = usePost([]);
@@ -19,7 +20,8 @@ const Posts = () => {
     // console.log("react ", react);
 
     const [announceData] = useAnnounce([]);
-    console.log("ann : ", announceData);
+    const [announceCount] = useAnnounceCount(0);
+    console.log('announce data : ' ,announceData);
 
 
     return (
@@ -31,7 +33,7 @@ const Posts = () => {
                 <div className="w-3/4">
 
                     <div className="py-2 border-2 justify-between bg-gray-100 flex">
-                        <h2 className="text-canvasThem text-2xl">All Posts : {count}</h2>
+                        <h2 className="text-canvasThem text-2xl">All Posts : {postCount}</h2>
                         <button
                             // onClick={()=> refetch()}
                             className="btn btn-outline btn-sm">Post</button>
@@ -72,7 +74,7 @@ const Posts = () => {
                     </TabList>
 
                     {
-                        announceData ? <Announcement></Announcement> : <div></div>
+                        announceCount ? <Announcement></Announcement> : <div></div>
                     }
                     
 
