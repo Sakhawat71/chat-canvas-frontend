@@ -3,25 +3,28 @@ import Announcement from "../Announce/Announcement";
 import { useLoaderData } from "react-router-dom";
 import usePost from "../../../hooks/usePost";
 import PostSection from "./PostSection/PostSection";
-import useAnnounce from "../../../hooks/useAnnounce";
 import useAnnounceCount from "../../../hooks/useAnnounceCount";
+// import useAnnounce from "../../../hooks/useAnnounce";
 
 const Posts = () => {
 
     const postCount = useLoaderData();
     // console.log(count);
 
-    const [posts, refetch] = usePost([]);
+    const [posts] = usePost([]);
     // console.log(posts);
 
-    refetch()
+    // refetch()
 
+    const node = posts.filter(p => p.tag === "Node.js");
     const react = posts.filter(p => p.tag === "React");
-    // console.log("react ", react);
+    const graphQL = posts.filter(p => p.tag === "GraphQL");
+    const css = posts.filter(p => p.tag === "CSS");
 
-    const [announceData] = useAnnounce([]);
+
+    // const [announceData] = useAnnounce([]);
     const [announceCount] = useAnnounceCount(0);
-    console.log('announce data : ' ,announceData);
+    // console.log('announce data : ' ,announceData);
 
 
     return (
@@ -44,17 +47,17 @@ const Posts = () => {
                     </TabPanel>
 
                     <TabPanel>
-                        <PostSection posts={react}></PostSection>
+                        <PostSection posts={node}></PostSection>
                     </TabPanel>
 
                     <TabPanel>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto exercitationem magni eos consectetur sed ipsum.</p>
+                        <PostSection posts={react}></PostSection>
                     </TabPanel>
                     <TabPanel>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto exercitationem magni eos consectetur sed ipsum.Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto exercitationem magni eos consectetur sed ipsum. Iusto exercitationem magni eos consectetur sed ipsum.</p>
+                        <PostSection posts={graphQL}></PostSection>
                     </TabPanel>
                     <TabPanel>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto exercitationem magni eos consectetur sed ipsum. Iusto exercitationem magni eos consectetur sed ipsum.</p>
+                        <PostSection posts={css}></PostSection>
                     </TabPanel>
                 </div>
 
@@ -77,7 +80,6 @@ const Posts = () => {
                         announceCount ? <Announcement></Announcement> : <div></div>
                     }
                     
-
                 </div>
 
             </Tabs>
