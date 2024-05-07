@@ -27,7 +27,7 @@ const PostCard = ({ singelPost }) => {
 
             <div className='space-y-1'>
                 <h2 className='text-xl font-medium '>{post?.title}</h2>
-                <p className='text-gray-500'>{postText}...</p>
+                <p className='text-gray-500'>{postText} ...</p>
 
                 <div className='flex items-center justify-around space-x-3 pt-2'>
 

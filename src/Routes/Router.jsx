@@ -16,7 +16,7 @@ const router = createBrowserRouter([
             {
                 path: '/',
                 element: <HomeLayout></HomeLayout>,
-                loader: () => fetch(`http://localhost:5000/api/v1/count`)
+                loader: () => fetch(`http://localhost:5000/api/v1/post-count`)
             },
             {
                 path: "/membership",
