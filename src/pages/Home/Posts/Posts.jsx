@@ -8,7 +8,7 @@ import useAnnounceCount from "../../../hooks/useAnnounceCount";
 
 const Posts = () => {
 
-    const postCount = useLoaderData();
+    const postCount = useLoaderData(0);
     // console.log(count);
 
     const [posts] = usePost([]);
@@ -28,15 +28,15 @@ const Posts = () => {
 
 
     return (
-        <div className="container mx-auto mt-10">
+        <div className="container mx-auto mt-10 ">
 
             <Tabs className="flex gap-10">
 
 
                 <div className="w-3/4">
 
-                    <div className="py-2 border-2 justify-between bg-gray-100 flex">
-                        <h2 className="text-canvasThem text-2xl">All Posts : {postCount}</h2>
+                    <div className="py-2 px-4 border-2 rounded-lg justify-between bg-[#CBFFE9] flex">
+                        <h2 className=" font-semibold text-2xl">All Posts : {postCount}</h2>
                         <button
                             // onClick={()=> refetch()}
                             className="btn btn-outline btn-sm">Post</button>
@@ -63,11 +63,11 @@ const Posts = () => {
 
 
                 {/* tag and announceMent section */}
-                <div className="w-1/4 border-[#44B584] border ">
+                <div className="w-1/4 border-[#7cd4ad] border sticky top-10">
 
                     <h3 className="text-black font-semibold text-center text-xl border-b py-3 bg-[#cbffe9] border-[#44B584]">Related Tags</h3>
 
-                    <TabList className='cursor-pointer flex p-4 flex-wrap space-x-2 '>
+                    <TabList className='cursor-pointer flex p-4 flex-wrap space-x-2 border '>
                         <Tab>All Posts</Tab>
                         <Tab className='hover:bg-lime-200'>Node.js</Tab>
                         <Tab>React</Tab>

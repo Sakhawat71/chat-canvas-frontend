@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { BiDownvote, BiUpvote } from "react-icons/bi";
+import { Link } from 'react-router-dom';
 
 const PostCard = ({ singelPost }) => {
     // console.log(singelPost);
@@ -12,8 +13,8 @@ const PostCard = ({ singelPost }) => {
 
 
     return (
-        <div
-            onClick={() => console.log('click singel post', singelPost._id)}
+        <Link
+            to={`/post-details/${singelPost._id}`}
             className='border-b border-gray-300 bg-gray-50 my-5 cursor-pointer p-4 flex'
         >
 
@@ -48,7 +49,7 @@ const PostCard = ({ singelPost }) => {
                     <p>Posted on <span className='font-medium'>{postDate}</span></p>
                 </div>
             </div>
-        </div>
+        </Link>
     );
 };
 

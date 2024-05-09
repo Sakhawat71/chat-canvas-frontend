@@ -3,7 +3,6 @@ import PostCard from '../../../../components/PostCard/PostCard';
 
 const PostSection = ({posts}) => {
     
-    // console.log(posts);
     
     return (
         <div>
