@@ -2,17 +2,18 @@ import { BiSolidDownvote, BiSolidUpvote } from "react-icons/bi";
 import { useLoaderData } from "react-router-dom";
 import { CiShoppingTag } from "react-icons/ci";
 import { FacebookIcon, FacebookShareButton, LinkedinIcon, LinkedinShareButton, TwitterIcon, TwitterShareButton, WhatsappIcon, WhatsappShareButton } from "react-share";
+import CommentCard from "../../../../components/CommentCard/CommentCard";
 
 const hostUrl = import.meta.env.VITE_HOST_SITE;
 const PostDetails = () => {
 
     const postData = useLoaderData([]);
-    const { _id, author, postTime, post, upvote, downvote, tag } = postData;
-    console.log(postData);
+    const { _id, author, postTime, post, upvote, downvote, tag, comments } = postData;
+    // console.log(postData);
 
     const postDate = postTime.split("T")[0];
     const shareUrl = `${hostUrl}post-details/${_id}`
-    console.log(shareUrl);
+    // console.log(shareUrl);
 
     return (
         <div className="container mx-auto px-5 bg-stone-50">
@@ -43,6 +44,7 @@ const PostDetails = () => {
 
             </div>
 
+            {/* vote and share option */}
             <div className="border my-2 py-2 flex bg-stone-50 items-center justify-between">
 
                 <div className="flex border rounded-3xl items-center ">
@@ -92,12 +94,45 @@ const PostDetails = () => {
                         </TwitterShareButton>
 
                         <WhatsappShareButton
-                        url={shareUrl}
+                            url={shareUrl}
                         >
                             <WhatsappIcon className="border rounded-full w-8 h-8" />
                         </WhatsappShareButton>
                     </div>
                 </div>
+
+            </div>
+
+            {/* comment section */}
+            <div className="my-5 p-5 mx-auto border-2 rounded-xl flex-col justify-center items-center">
+
+                <div className="flex items-center justify-between">
+                    <p className="font-bold">Post Your Comment: </p>
+                    <button className="btn">Post comment</button>
+                </div>
+
+                <textarea
+                    className="textarea textarea-bordered flex mx-auto w-3/4 "
+                    placeholder="Your comment..."
+                ></textarea>
+
+            </div>
+
+            {/* total comment and show comment */}
+
+            <div className="border p-5">
+
+                <p className="text-xl font-semibold">Comments : {comments?.length}</p>
+
+                {comments?.length ? comments.map((comment, i) => <CommentCard
+                    key={i}
+                    singelComment={comment}
+                ></CommentCard>)
+                    :
+                    <div className="flex justify-center">
+                        <p>No comments have been made so far!</p>
+                    </div>
+                }
 
             </div>
 
