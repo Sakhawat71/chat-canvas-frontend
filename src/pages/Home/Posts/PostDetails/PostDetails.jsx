@@ -1,16 +1,18 @@
 import { BiSolidDownvote, BiSolidUpvote } from "react-icons/bi";
 import { useLoaderData } from "react-router-dom";
 import { CiShoppingTag } from "react-icons/ci";
-import { FacebookShareButton, LinkedinShareButton } from "react-share";
+import { FacebookIcon, FacebookShareButton, LinkedinIcon, LinkedinShareButton, TwitterIcon, TwitterShareButton, WhatsappIcon, WhatsappShareButton } from "react-share";
 
+const hostUrl = import.meta.env.VITE_HOST_SITE;
 const PostDetails = () => {
 
     const postData = useLoaderData([]);
-    const { author, postTime, post, upvote, downvote, tag } = postData;
+    const { _id, author, postTime, post, upvote, downvote, tag } = postData;
     console.log(postData);
 
     const postDate = postTime.split("T")[0];
-    // console.log(postDate);
+    const shareUrl = `${hostUrl}post-details/${_id}`
+    console.log(shareUrl);
 
     return (
         <div className="container mx-auto px-5 bg-stone-50">
@@ -41,7 +43,7 @@ const PostDetails = () => {
 
             </div>
 
-            <div className="border my-2 py-2 flex bg-stone-50 items-center">
+            <div className="border my-2 py-2 flex bg-stone-50 items-center justify-between">
 
                 <div className="flex border rounded-3xl items-center ">
 
@@ -59,13 +61,42 @@ const PostDetails = () => {
 
                 </div>
 
-                <div>
+                <div className="flex items-center gap-5">
                     <button className="flex items-center text-xl">
                         <CiShoppingTag />
                         {tag}
                     </button>
-                    <FacebookShareButton url="/hello"/>
-                    <LinkedinShareButton/>
+
+                    <p>Share this: </p>
+
+                    <div>
+
+                        <FacebookShareButton
+                            url={shareUrl}
+                            hashtag={`#${tag}`}
+                        >
+                            <FacebookIcon className="border rounded-full w-8 h-8" />
+                        </FacebookShareButton>
+
+                        <LinkedinShareButton
+                            url={shareUrl}
+                        >
+                            <LinkedinIcon className="border rounded-full w-8 h-8" />
+                        </LinkedinShareButton>
+
+                        <TwitterShareButton
+                            url={shareUrl}
+                            hashtags={`#${tag}`}
+                        >
+                            <TwitterIcon className="border rounded-full w-8 h-8" />
+                        </TwitterShareButton>
+
+                        <WhatsappShareButton
+                        url={shareUrl}
+                        >
+                            <WhatsappIcon className="border rounded-full w-8 h-8" />
+                        </WhatsappShareButton>
+                    </div>
                 </div>
 
             </div>
