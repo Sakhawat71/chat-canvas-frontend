@@ -1,11 +1,12 @@
 import { BiSolidDownvote, BiSolidUpvote } from "react-icons/bi";
 import { useLoaderData } from "react-router-dom";
-
+import { CiShoppingTag } from "react-icons/ci";
+import { FacebookShareButton, LinkedinShareButton } from "react-share";
 
 const PostDetails = () => {
 
     const postData = useLoaderData([]);
-    const { author, postTime, post, upvote, downvote } = postData;
+    const { author, postTime, post, upvote, downvote, tag } = postData;
     console.log(postData);
 
     const postDate = postTime.split("T")[0];
@@ -40,11 +41,11 @@ const PostDetails = () => {
 
             </div>
 
-            <div className="border my-2 py-2 flex bg-stone-50">
+            <div className="border my-2 py-2 flex bg-stone-50 items-center">
 
                 <div className="flex border rounded-3xl items-center ">
 
-                    <button className="items-center p-2 text-gray-700 hover:text-green-600">
+                    <button className=" items-center p-2 text-gray-700 hover:text-green-600 ">
                         <BiSolidUpvote className="text-3xl" />
                     </button>
 
@@ -58,7 +59,14 @@ const PostDetails = () => {
 
                 </div>
 
-                <p>comments</p>
+                <div>
+                    <button className="flex items-center text-xl">
+                        <CiShoppingTag />
+                        {tag}
+                    </button>
+                    <FacebookShareButton url="/hello"/>
+                    <LinkedinShareButton/>
+                </div>
 
             </div>
 
