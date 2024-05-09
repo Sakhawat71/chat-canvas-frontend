@@ -7,6 +7,7 @@ import Register from "../pages/sign/Register/Register";
 import HomeLayout from "../pages/Home/HomeLayout/HomeLayout";
 import Membership from "../pages/Membership/Membership";
 import PostDetails from "../pages/Home/Posts/PostDetails/PostDetails";
+import PrivetRoute from "./PrivetRoute";
 
 const router = createBrowserRouter([
     {
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/membership",
-                element: <Membership></Membership>,
+                element: <PrivetRoute> <Membership></Membership> </PrivetRoute>
             },
             {
                 path: `/post-details/:id`,
