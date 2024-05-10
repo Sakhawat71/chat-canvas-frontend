@@ -4,6 +4,7 @@ import { useLoaderData } from "react-router-dom";
 import usePost from "../../../hooks/usePost";
 import PostSection from "./PostSection/PostSection";
 import useAnnounceCount from "../../../hooks/useAnnounceCount";
+import { AwesomeButton } from "react-awesome-button";
 // import useAnnounce from "../../../hooks/useAnnounce";
 
 const Posts = () => {
@@ -37,9 +38,8 @@ const Posts = () => {
 
                     <div className="py-2 px-4 border-2 rounded-lg justify-between bg-[#CBFFE9] flex">
                         <h2 className=" font-semibold text-2xl">All Posts : {postCount}</h2>
-                        <button
-                            // onClick={()=> refetch()}
-                            className="btn btn-outline btn-sm">Post</button>
+                        {/* <button className="btn btn-outline btn-sm">Post</button> */}
+                        <AwesomeButton type="secondary">Post now</AwesomeButton>
                     </div>
 
                     <TabPanel>
@@ -79,7 +79,7 @@ const Posts = () => {
                     {
                         announceCount ? <Announcement></Announcement> : <div></div>
                     }
-                    
+
                 </div>
 
             </Tabs>

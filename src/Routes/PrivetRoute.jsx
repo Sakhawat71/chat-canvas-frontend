@@ -12,7 +12,7 @@ const PrivetRoute = ({ children }) => {
     if (loading) {
         return (
             <div className='flex justify-center items-center h-screen'>
-                <BiLoader color="#36d7b7" />
+                <BiLoader className='text-7xl animate-spin' color="#36d7b7" />
             </div>
         )
     }
