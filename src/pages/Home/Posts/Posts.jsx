@@ -36,10 +36,13 @@ const Posts = () => {
 
                 <div className="w-3/4">
 
-                    <div className="py-2 px-4 border-2 rounded-lg justify-between bg-[#CBFFE9] flex">
+                    <div className="py-2 px-4 border-2 rounded-lg justify-between bg-[#CBFFE9] flex items-center">
                         <h2 className=" font-semibold text-2xl">All Posts : {postCount}</h2>
-                        {/* <button className="btn btn-outline btn-sm">Post</button> */}
-                        <AwesomeButton type="secondary">Post now</AwesomeButton>
+                        
+                        <AwesomeButton
+                            type="secondary"
+                            className="bg-[#cbffe9]"
+                        >Post now</AwesomeButton>
                     </div>
 
                     <TabPanel>
@@ -63,7 +66,7 @@ const Posts = () => {
 
 
                 {/* tag and announceMent section */}
-                <div className="w-1/4 border-[#7cd4ad] border sticky top-10">
+                <div className="w-1/4 rounded-2xl top-10">
 
                     <h3 className="text-black font-semibold text-center text-xl border-b py-3 bg-[#cbffe9] border-[#44B584]">Related Tags</h3>
 

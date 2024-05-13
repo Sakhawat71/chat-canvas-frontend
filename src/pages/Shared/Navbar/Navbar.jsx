@@ -10,17 +10,19 @@ import { AuthContext } from "../../../providers/AuthProvider";
 import { ImSpinner6 } from "react-icons/im";
 import { RemoveJwtToken } from "../../../utilities/api/jwtReletedUtilites";
 import useAnnounceCount from "../../../hooks/useAnnounceCount";
+import { BiSolidBadge } from "react-icons/bi";
+import useUserData from "../../../hooks/useUserData";
 
-
-const Navbar = () => {
+const Navbar =  () => {
 
     const {
         user,
         logout,
         loading,
-        // setLaoding
     } = useContext(AuthContext);
 
+    const [userDataInDB] = useUserData();
+    console.log(userDataInDB);
 
     const handelLogOut = () => {
         logout()
@@ -63,8 +65,8 @@ const Navbar = () => {
                     announceCount ? <div className="indicator bottom-7 left-3">
                         <span className="animate-pulse badge badge-xs badge-primary indicator-item"></span>
                     </div>
-                    :
-                    <div></div>
+                        :
+                        <div></div>
                 }
             </NavLink>
         </li>
@@ -113,7 +115,14 @@ const Navbar = () => {
                 {
                     user?.email
                         ?
-                        <div className="dropdown dropdown-end ">
+                        <div className="dropdown dropdown-end flex items-center">
+
+                            <div>
+                                {
+                                    <h2>{userDataInDB?.badge}</h2> 
+                                }
+                                <BiSolidBadge className="text-slate-600"/>
+                            </div>
 
                             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar border-black border">
                                 <div className="w-24 rounded-full">
