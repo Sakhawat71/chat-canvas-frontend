@@ -10,10 +10,11 @@ import { AuthContext } from "../../../providers/AuthProvider";
 import { ImSpinner6 } from "react-icons/im";
 import { RemoveJwtToken } from "../../../utilities/api/jwtReletedUtilites";
 import useAnnounceCount from "../../../hooks/useAnnounceCount";
-import { BiSolidBadge } from "react-icons/bi";
 import useUserData from "../../../hooks/useUserData";
+import goldBadge from "../../../assets/badge_gold.png";
+import bronzeBadge from "../../../assets/badge_bronze.png";
 
-const Navbar =  () => {
+const Navbar = () => {
 
     const {
         user,
@@ -115,13 +116,15 @@ const Navbar =  () => {
                 {
                     user?.email
                         ?
-                        <div className="dropdown dropdown-end flex items-center">
+                        <div className="dropdown dropdown-end dropdown-bottom flex items-center">
 
-                            <div>
+                            <div className="md:mr-5">
                                 {
-                                    <h2>{userDataInDB?.badge}</h2> 
+                                    userDataInDB?.badge === 'bronze' ? 
+                                    <img className="w-8" src={bronzeBadge} alt="bronze Badge" title="non premium user" />
+                                    :
+                                    <img className="w-8" src={goldBadge} alt="gold Badge" />    
                                 }
-                                <BiSolidBadge className="text-slate-600"/>
                             </div>
 
                             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar border-black border">
