@@ -13,6 +13,8 @@ import useAnnounceCount from "../../../hooks/useAnnounceCount";
 import useUserData from "../../../hooks/useUserData";
 import goldBadge from "../../../assets/badge_gold.png";
 import bronzeBadge from "../../../assets/badge_bronze.png";
+import { MdDashboard, MdLogout } from "react-icons/md";
+import { FaRegUser } from "react-icons/fa";
 
 const Navbar = () => {
 
@@ -120,10 +122,10 @@ const Navbar = () => {
 
                             <div className="md:mr-5">
                                 {
-                                    userDataInDB?.badge === 'bronze' ? 
-                                    <img className="w-8" src={bronzeBadge} alt="bronze Badge" title="non premium user" />
-                                    :
-                                    <img className="w-8" src={goldBadge} alt="gold Badge" />    
+                                    userDataInDB?.badge === 'bronze' ?
+                                        <img className="w-8" src={bronzeBadge} alt="bronze Badge" title="non premium user" />
+                                        :
+                                        <img className="w-8" src={goldBadge} alt="gold Badge" />
                                 }
                             </div>
 
@@ -133,18 +135,22 @@ const Navbar = () => {
                                 </div>
                             </div>
 
-                            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-xl space-y-2">
+                            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-xl space-y-2 ">
 
-                                <li className="px-3">
-                                    {user?.displayName}
+                                <p className="flex pl-3 items-center ">
+                                    <FaRegUser className="pr-2" /> {user?.displayName}
+                                </p>
+
+                                <li className="hover:font-bold">
+                                    <Link to="/dashboard">
+                                        <MdDashboard />
+                                        Dashboard</Link>
                                 </li>
 
                                 <li className="hover:font-bold">
-                                    <Link to="/dashboard">Dashboard</Link>
-                                </li>
-
-                                <li className="hover:font-bold">
-                                    <button onClick={handelLogOut}>Logout</button>
+                                    <button onClick={handelLogOut}>
+                                        <MdLogout />
+                                        Logout</button>
                                 </li>
                             </ul>
 
