@@ -5,34 +5,41 @@ import usePost from "../../../hooks/usePost";
 import PostSection from "./PostSection/PostSection";
 import useAnnounceCount from "../../../hooks/useAnnounceCount";
 import { AwesomeButton } from "react-awesome-button";
+import PropTypes from 'prop-types';
 import { useEffect, useState } from "react";
 
-const Posts = () => {
+const Posts = ({ searchPost }) => {
 
-
-    // const [allPosts, setAllPosts] = useState([])
-
+    const [allPosts, setAllPosts] = useState([])
     const postCount = useLoaderData(0);
-    const [posts] = usePost([]);
+    const [announceCount] = useAnnounceCount(0);
+
+    const [posts, refetch] = usePost([]);
+
+    // refetch()
+    useEffect(() => {
+
+        if (searchPost.length) {
+            setAllPosts(searchPost)
+        }
+        else {
+            setAllPosts(posts)
+        }
+    }, [searchPost, posts])
 
 
-    // useEffect(() => {
+    console.log(" api posts ", posts);
+    console.log("search posts", searchPost);
+    console.log('posts search + all', allPosts);
 
-    //     setAllPosts(posts)
-
-    // }, [posts])
-
-
-    // console.log("all posts", allPosts);
-
-    const node = posts.filter(p => p.tag === "Node.js");
-    const react = posts.filter(p => p.tag === "React");
-    const graphQL = posts.filter(p => p.tag === "GraphQL");
-    const css = posts.filter(p => p.tag === "CSS");
+    // tag
+    const node = allPosts.filter(p => p.tag === "Node.js");
+    const react = allPosts.filter(p => p.tag === "React");
+    const graphQL = allPosts.filter(p => p.tag === "GraphQL");
+    const css = allPosts.filter(p => p.tag === "CSS");
 
 
     // const [announceData] = useAnnounce([]);
-    const [announceCount] = useAnnounceCount(0);
     // console.log('announce data : ' ,announceData);
 
 
@@ -54,7 +61,7 @@ const Posts = () => {
                     </div>
 
                     <TabPanel>
-                        <PostSection posts={posts}></PostSection>
+                        <PostSection posts={allPosts}></PostSection>
                     </TabPanel>
 
                     <TabPanel>
@@ -97,6 +104,10 @@ const Posts = () => {
 
         </div>
     );
+};
+
+Posts.propTypes = {
+    searchPost: PropTypes.array.isRequired,
 };
 
 export default Posts;

@@ -7,7 +7,7 @@ const useSearchForPosts = (searchText) => {
     const axiosPubluc = useAxiosPublic()
 
     const { data: searchData = [] } = useQuery({
-        queryKey: ['search'],
+        queryKey: ['search',searchText],
         queryFn: async () => {
             const res = await axiosPubluc.get(`/api/v1/search/${searchText}`)
             return res.data;

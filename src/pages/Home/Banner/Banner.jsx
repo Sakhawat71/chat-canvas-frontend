@@ -1,13 +1,12 @@
-// import PropTypes from 'prop-types';
-import { useState } from "react";
+import PropTypes from 'prop-types';
+// import { useState } from "react";
 import { GrSearch } from "react-icons/gr";
-import { SearchForPosts } from "../../../utilities/post/SearchForPosts";
+// import { SearchForPosts } from "../../../utilities/post/SearchForPosts";
 
-const Banner = () => {
+const Banner = ({setSearchText}) => {
 
-    const [showKeyword, setShowKeyword] = useState(false);
-    const [searchText, setSearchText] = useState('');
-    const [searchPost, isLoading] = SearchForPosts(searchText);
+    // const [showKeyword, setShowKeyword] = useState(false);
+
 
     const handelSearch = (e) => {
         e.preventDefault()
@@ -17,13 +16,12 @@ const Banner = () => {
         if (searchText) {
             setSearchText(searchText);
         }
-
         form.reset()
     }
 
-    if (!isLoading) {
-        console.log(searchPost)
-    }
+    // if (searchPost.length > 0) {
+    // console.log(searchPost)
+    // }
 
 
     return (
@@ -34,8 +32,8 @@ const Banner = () => {
             <form
 
                 onSubmit={handelSearch}
-                onClick={() => setShowKeyword(true)}
-                onBlur={() => setShowKeyword(false)}
+                // onClick={() => setShowKeyword(true)}
+                // onBlur={() => setShowKeyword(false)}
 
                 className="form-control relative mx-auto w-1/2 lg:w-1/3">
 
@@ -47,8 +45,8 @@ const Banner = () => {
                 />
 
                 <button
-
                     type="submit"
+                    aria-label="Search"
                     className="btn btn-ghost btn-circle absolute right-0"
                 >
                     <GrSearch />
@@ -56,19 +54,19 @@ const Banner = () => {
             </form>
 
 
-            <div className={`space-x-3 my-2 flex cursor-pointer ${showKeyword === true ? 'block' : 'hidden'}`}>
+            {/* <div className={`space-x-3 my-2 flex cursor-pointer ${showKeyword === true ? 'block' : 'hidden'}`}>
                 <h3>Popular topics: </h3>
                 <p>hello</p>
                 <p>text</p>
                 <p>topics</p>
-            </div>
+            </div> */}
 
         </div>
     );
 };
 
-// Banner.propTypes = {
-//     
-// };
+Banner.propTypes = {
+    setSearchText : PropTypes.func.isRequired,
+};
 
 export default Banner;
