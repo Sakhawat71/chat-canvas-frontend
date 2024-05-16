@@ -122,10 +122,10 @@ const Navbar = () => {
 
                             <div className="md:mr-5">
                                 {
-                                    userDataInDB?.badge === 'bronze' ?
-                                        <img className="w-8" src={bronzeBadge} alt="bronze Badge" title="non premium user" />
-                                        :
-                                        <img className="w-8" src={goldBadge} alt="gold Badge" />
+                                    userDataInDB?.badge === 'gold' ?
+                                    <img className="w-8" src={goldBadge} alt="gold Badge" />
+                                    :
+                                    <img className="w-8" src={bronzeBadge} alt="bronze Badge" title="non premium user" />
                                 }
                             </div>
 

@@ -7,6 +7,7 @@ import useAnnounceCount from "../../../hooks/useAnnounceCount";
 import { AwesomeButton } from "react-awesome-button";
 import PropTypes from 'prop-types';
 import { useEffect, useState } from "react";
+import { GridLoader } from "react-spinners";
 
 const Posts = ({ searchPost }) => {
 
@@ -14,7 +15,7 @@ const Posts = ({ searchPost }) => {
     const postCount = useLoaderData(0);
     const [announceCount] = useAnnounceCount(0);
 
-    const [posts, refetch] = usePost([]);
+    const [posts, refetch,isLoading] = usePost([]);
 
     // refetch()
     useEffect(() => {
@@ -25,12 +26,13 @@ const Posts = ({ searchPost }) => {
         else {
             setAllPosts(posts)
         }
-    }, [searchPost, posts])
+        
+    }, [searchPost, posts, refetch])
 
 
-    console.log(" api posts ", posts);
-    console.log("search posts", searchPost);
-    console.log('posts search + all', allPosts);
+    // console.log(" api posts ", posts);
+    // console.log("search posts", searchPost);
+    // console.log('posts search + all', allPosts);
 
     // tag
     const node = allPosts.filter(p => p.tag === "Node.js");
@@ -42,6 +44,9 @@ const Posts = ({ searchPost }) => {
     // const [announceData] = useAnnounce([]);
     // console.log('announce data : ' ,announceData);
 
+    if(isLoading){
+        <GridLoader color="#36d7b7" />
+    }
 
     return (
         <div className="container mx-auto mt-10 ">
