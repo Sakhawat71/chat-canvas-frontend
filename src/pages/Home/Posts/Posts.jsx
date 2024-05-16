@@ -5,17 +5,25 @@ import usePost from "../../../hooks/usePost";
 import PostSection from "./PostSection/PostSection";
 import useAnnounceCount from "../../../hooks/useAnnounceCount";
 import { AwesomeButton } from "react-awesome-button";
-// import useAnnounce from "../../../hooks/useAnnounce";
+import { useEffect, useState } from "react";
 
 const Posts = () => {
 
+
+    // const [allPosts, setAllPosts] = useState([])
+
     const postCount = useLoaderData(0);
-    // console.log(count);
-
     const [posts] = usePost([]);
-    // console.log(posts);
 
-    // refetch()
+
+    // useEffect(() => {
+
+    //     setAllPosts(posts)
+
+    // }, [posts])
+
+
+    // console.log("all posts", allPosts);
 
     const node = posts.filter(p => p.tag === "Node.js");
     const react = posts.filter(p => p.tag === "React");
@@ -38,7 +46,7 @@ const Posts = () => {
 
                     <div className="py-2 px-4 border-2 rounded-lg justify-between bg-[#CBFFE9] flex items-center">
                         <h2 className=" font-semibold text-2xl">All Posts : {postCount}</h2>
-                        
+
                         <AwesomeButton
                             type="secondary"
                             className="bg-[#cbffe9]"

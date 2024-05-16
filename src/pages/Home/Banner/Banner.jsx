@@ -1,21 +1,29 @@
+// import PropTypes from 'prop-types';
 import { useState } from "react";
 import { GrSearch } from "react-icons/gr";
+import { SearchForPosts } from "../../../utilities/post/SearchForPosts";
 
 const Banner = () => {
 
     const [showKeyword, setShowKeyword] = useState(false);
+    const [searchText, setSearchText] = useState('');
+    const [searchPost, isLoading] = SearchForPosts(searchText);
 
-    const handleSearch = (e) => {
-        e.preventDefault();
-        const searchText = e.target.search.value;
+    const handelSearch = (e) => {
+        e.preventDefault()
+        const form = e.target;
+        const searchText = form.search.value;
 
-        console.log(searchText);
+        if (searchText) {
+            setSearchText(searchText);
+        }
 
-    };
+        form.reset()
+    }
 
-    // const toggleKeyWord = () => {
-    //     setShowKeyword(!showKeyword)
-    // }
+    if (!isLoading) {
+        console.log(searchPost)
+    }
 
 
     return (
@@ -24,10 +32,11 @@ const Banner = () => {
             className="navbar bg-base-300 flex-col justify-center">
 
             <form
-                onSubmit={handleSearch}
+
+                onSubmit={handelSearch}
                 onClick={() => setShowKeyword(true)}
                 onBlur={() => setShowKeyword(false)}
-                
+
                 className="form-control relative mx-auto w-1/2 lg:w-1/3">
 
                 <input
@@ -57,5 +66,9 @@ const Banner = () => {
         </div>
     );
 };
+
+// Banner.propTypes = {
+//     
+// };
 
 export default Banner;

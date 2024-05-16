@@ -22,8 +22,8 @@ const Navbar = () => {
         loading,
     } = useContext(AuthContext);
 
-    const [userDataInDB] = useUserData();
-    console.log(userDataInDB);
+    const [userDataInDB] = useUserData([]);
+    // console.log(userDataInDB);
 
     const handelLogOut = () => {
         logout()
