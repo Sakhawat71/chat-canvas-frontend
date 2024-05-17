@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 const CommentCard = ({ singelComment }) => {
 
     const { author, content } = singelComment;
-    console.log(singelComment);
+    // console.log(singelComment);
 
     return (
         <div className='my-5 md:pl-10 '>
