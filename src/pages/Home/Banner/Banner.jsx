@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { GrSearch } from "react-icons/gr";
 // import { SearchForPosts } from "../../../utilities/post/SearchForPosts";
 
-const Banner = ({setSearchText}) => {
+const Banner = ({ setSearchText }) => {
 
     // const [showKeyword, setShowKeyword] = useState(false);
 
@@ -13,9 +13,9 @@ const Banner = ({setSearchText}) => {
         const form = e.target;
         const searchText = form.search.value;
 
-        if (searchText) {
-            setSearchText(searchText);
-        }
+        // if (searchText) {
+        setSearchText(searchText);
+        // }
         form.reset()
     }
 
@@ -66,7 +66,7 @@ const Banner = ({setSearchText}) => {
 };
 
 Banner.propTypes = {
-    setSearchText : PropTypes.func.isRequired,
+    setSearchText: PropTypes.func.isRequired,
 };
 
 export default Banner;

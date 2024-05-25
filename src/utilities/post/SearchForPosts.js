@@ -15,7 +15,7 @@ export const SearchForPosts = (searchText) => {
             return res.data;
         }
     })
-
+    // not in use
     return [searchPost, isLoading];
 
 }

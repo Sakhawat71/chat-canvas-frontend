@@ -1,6 +1,6 @@
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import Announcement from "../Announce/Announcement";
-// import { useLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import usePost from "../../../hooks/usePost";
 import PostSection from "./PostSection/PostSection";
 import useAnnounceCount from "../../../hooks/useAnnounceCount";
@@ -9,60 +9,50 @@ import PropTypes from 'prop-types';
 import { useEffect, useState } from "react";
 import { GridLoader } from "react-spinners";
 
-const Posts = ({ searchPost }) => {
+const Posts = ({ searchText }) => {
 
-    const [allPosts, setAllPosts] = useState([])
-    // const postCount = useLoaderData(0);
+    // console.log('search text in posts ', searchText);
+
     const [announceCount] = useAnnounceCount(0);
+    const [allPosts, setAllPosts] = useState([])
+    const postCount = useLoaderData(0);
 
 
-        // pagination
-        const itemsParPage = 5;
-        const totalPost = allPosts.length;
-        // const totalPost = 50;
-        const totalPage = Math.ceil(totalPost / itemsParPage)
-        const pages = [...Array(totalPage).keys()]
-        const [currentPage, setCurrentPage] = useState(1)
-        console.log('current Page ', currentPage);
-        
-        const hendelPageChange = (preOrNext) => {
-            if (preOrNext === 'pre' && currentPage > 1) {
-                setCurrentPage(currentPage - 1)
-            }
-            if (preOrNext === 'next' && currentPage < pages.length) {
-                setCurrentPage(currentPage + 1)
-                console.log('next',pages.length)
-            }
+    // pagination
+    const itemsParPage = 5;
+    const totalPost = allPosts?.length;
+    const totalPage = Math.ceil(totalPost / itemsParPage)
+    const pages = [...Array(totalPage).keys()]
+    const [currentPage, setCurrentPage] = useState(1)
+    // console.log('current Page ', currentPage);
+
+    const hendelPageChange = (preOrNext) => {
+        if (preOrNext === 'pre' && currentPage > 1) {
+            setCurrentPage(currentPage - 1)
         }
+        if (preOrNext === 'next' && currentPage < pages.length) {
+            setCurrentPage(currentPage + 1)
+            // console.log('next', pages.length)
+        }
+    }
 
-    const [posts, refetch, isLoading] = usePost(currentPage);
+    const [posts, refetch, isLoading] = usePost(searchText, currentPage - 1);
+    // console.log("posts in usePost hook", posts);
 
     useEffect(() => {
 
-        if (searchPost.length) {
-            setAllPosts(searchPost)
-        }
-        else {
-            setAllPosts(posts)
-        }
+        // if (searchPost.length) {
+        //     setAllPosts(searchPost)
+        // }
+        // else {
+        setAllPosts(posts)
+        // }
+        // searchText
+    }, [posts, refetch])
 
-    }, [searchPost, posts, refetch])
-
-
-
-
-
-
-
-
-
-    // console.log(" api posts ", posts);
-    // console.log("search posts", searchPost);
-    // console.log('posts search + all', allPosts);
 
     // tag
-    
-    // const [posts, refetch, isLoading] = usePost(currentPage,itemsParPage);
+
     const node = allPosts.filter(p => p.tag === "Node.js");
     const react = allPosts.filter(p => p.tag === "React");
     const graphQL = allPosts.filter(p => p.tag === "GraphQL");
@@ -72,9 +62,6 @@ const Posts = ({ searchPost }) => {
     // const [announceData] = useAnnounce([]);
     // console.log('announce data : ' ,announceData);
 
-    if (isLoading) {
-        <GridLoader color="#36d7b7" />
-    }
 
     return (
         <div className="container mx-auto mt-10 ">
@@ -92,6 +79,18 @@ const Posts = ({ searchPost }) => {
                             className="bg-[#cbffe9]"
                         >Post now</AwesomeButton>
                     </div>
+
+                    {
+                        isLoading && <div className="flex mx-auto mt-10 justify-center items-center">
+                            <GridLoader color="#36d7b7" />
+                        </div>
+                    }
+
+                    {
+                        isLoading || !posts.length && <div className="flex mx-auto justify-center items-center mt-10">
+                            <p className="text-xl text-red-500">Sorry, No posts found for `{searchText}`</p>
+                        </div>
+                    }
 
                     <div>
                         <TabPanel>
@@ -116,26 +115,30 @@ const Posts = ({ searchPost }) => {
 
 
                     {/* ++++++++++++++++++  pagination ++++++++++++++++++++++++ */}
-                    {
-                        allPosts.length > 5 && <div className="join flex mx-auto justify-center space-x-3 my-10">
-                            <button
-                                onClick={() => hendelPageChange('pre')}
-                                className="join-item btn btn-outline"
-                            >Prev</button>
-                            {
-                                pages?.map(page => <button
-                                    key={page}
-                                    className={currentPage === page + 1 ? `btn join-item bg-[#E58849] text-white` : 'btn join-item'}
-                                    onClick={() => setCurrentPage(page + 1)}
-                                >{page + 1}</button>)
-                            }
-                            <button
-                                onClick={() => hendelPageChange('next')}
-                                className="join-item btn btn-outline"
-                            >Next</button>
-                        </div>
-                    }
-                    <p>{currentPage}</p>
+                    {/* allPosts.length > 5 && */}
+
+                    <div className="join flex mx-auto justify-center space-x-3 mt-10">
+                        <button
+                            onClick={() => hendelPageChange('pre')}
+                            className="join-item btn btn-outline"
+                        >Prev</button>
+                        {
+                            pages?.map(page => <button
+                                key={page}
+                                className={currentPage === page + 1 ? `btn join-item bg-[#E58849] text-white` : 'btn join-item'}
+                                onClick={() => setCurrentPage(page + 1)}
+                            >{page + 1}</button>)
+                        }
+                        <button
+                            onClick={() => hendelPageChange('next')}
+                            className="join-item btn btn-outline"
+                        >Next</button>
+                    </div>
+
+                    <div className="flex justify-center mt-5">
+                        <p>Current page : {currentPage}</p>
+                    </div>
+
                 </div>
 
 
@@ -145,16 +148,16 @@ const Posts = ({ searchPost }) => {
                     <h3 className="text-black font-semibold text-center text-xl border-b py-3 bg-[#cbffe9] border-[#44B584]">Related Tags</h3>
 
                     <TabList className='cursor-pointer flex p-4 flex-wrap space-x-2 border '>
-                        <Tab>All Posts</Tab>
-                        <Tab className='hover:bg-lime-200'>Node.js</Tab>
-                        <Tab>React</Tab>
-                        <Tab>GraphQL</Tab>
-                        <Tab>CSS</Tab>
+                        <Tab className='hover:bg-lime-200 p-1 rounded-lg'>All Posts</Tab>
+                        <Tab className='hover:bg-lime-200 p-1 rounded-lg'>Node.js</Tab>
+                        <Tab className='hover:bg-lime-200 p-1 rounded-lg'>React</Tab>
+                        <Tab className='hover:bg-lime-200 p-1 rounded-lg'>GraphQL</Tab>
+                        <Tab className='hover:bg-lime-200 p-1 rounded-lg'>CSS</Tab>
 
                     </TabList>
 
                     {
-                        announceCount ? <Announcement></Announcement> : <div></div>
+                        announceCount ? <Announcement /> : null
                     }
 
                 </div>
@@ -166,7 +169,7 @@ const Posts = ({ searchPost }) => {
 };
 
 Posts.propTypes = {
-    searchPost: PropTypes.array.isRequired,
+    searchText: PropTypes.string,
 };
 
 export default Posts;
