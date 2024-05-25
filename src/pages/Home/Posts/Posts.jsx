@@ -15,28 +15,36 @@ const Posts = ({ searchText }) => {
 
     const [announceCount] = useAnnounceCount(0);
     const [allPosts, setAllPosts] = useState([])
-    const postCount = useLoaderData(0);
-
-
-    // pagination
-    const itemsParPage = 5;
-    const totalPost = allPosts?.length;
-    const totalPage = Math.ceil(totalPost / itemsParPage)
-    const pages = [...Array(totalPage).keys()]
     const [currentPage, setCurrentPage] = useState(1)
-    // console.log('current Page ', currentPage);
+    const [posts, refetch, isLoading] = usePost(searchText, currentPage - 1);
+    const postCount = useLoaderData(0);
 
     const hendelPageChange = (preOrNext) => {
         if (preOrNext === 'pre' && currentPage > 1) {
             setCurrentPage(currentPage - 1)
+            refetch()
         }
         if (preOrNext === 'next' && currentPage < pages.length) {
             setCurrentPage(currentPage + 1)
+            refetch()
             // console.log('next', pages.length)
         }
     }
 
-    const [posts, refetch, isLoading] = usePost(searchText, currentPage - 1);
+
+
+
+    // pagination
+    const itemsParPage = 5;
+    const totalPost = postCount;
+    const totalPage = Math.ceil(totalPost / itemsParPage)
+    const pages = [...Array(totalPage).keys()]
+
+    // console.log('current Page ', currentPage);
+
+
+
+
     // console.log("posts in usePost hook", posts);
 
     useEffect(() => {
@@ -115,9 +123,9 @@ const Posts = ({ searchText }) => {
 
 
                     {/* ++++++++++++++++++  pagination ++++++++++++++++++++++++ */}
-                    {/* allPosts.length > 5 && */}
+                    {/* */}
 
-                    <div className="join flex mx-auto justify-center space-x-3 mt-10">
+                    {postCount > 5 && <div className="join flex mx-auto justify-center space-x-3 mt-10">
                         <button
                             onClick={() => hendelPageChange('pre')}
                             className="join-item btn btn-outline"
@@ -134,7 +142,7 @@ const Posts = ({ searchText }) => {
                             className="join-item btn btn-outline"
                         >Next</button>
                     </div>
-
+                    }
                     <div className="flex justify-center mt-5">
                         <p>Current page : {currentPage}</p>
                     </div>
