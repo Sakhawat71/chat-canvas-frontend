@@ -8,6 +8,8 @@ import { AwesomeButton } from "react-awesome-button";
 import PropTypes from 'prop-types';
 import { useEffect, useState } from "react";
 import { GridLoader } from "react-spinners";
+import Pagination from "../../../components/Pagination/Pagination";
+import usePostByTag from "../../../hooks/usePostByTag";
 
 const Posts = ({ searchText }) => {
 
@@ -61,15 +63,20 @@ const Posts = ({ searchText }) => {
 
     // tag
 
-    const node = allPosts.filter(p => p.tag === "Node.js");
-    const react = allPosts.filter(p => p.tag === "React");
-    const graphQL = allPosts.filter(p => p.tag === "GraphQL");
-    const css = allPosts.filter(p => p.tag === "CSS");
+    // const node = allPosts.filter(p => p.tag === "Node.js");
+    // const react = allPosts.filter(p => p.tag === "React");
+    // const graphQL = allPosts.filter(p => p.tag === "GraphQL");
+    // const css = allPosts.filter(p => p.tag === "CSS");
+    const [node] = usePostByTag('Node.js')
+    const [react] = usePostByTag('React')
+    const [graphQL] = usePostByTag("GraphQL")
+    const [css] = usePostByTag("CSS")
 
 
     // const [announceData] = useAnnounce([]);
     // console.log('announce data : ' ,announceData);
 
+    const pagination = { hendelPageChange, pages, currentPage, setCurrentPage }
 
     return (
         <div className="container mx-auto mt-10 ">
@@ -80,7 +87,7 @@ const Posts = ({ searchText }) => {
                 <div className="w-3/4">
 
                     <div className="py-2 px-4 border-2 rounded-lg justify-between bg-[#CBFFE9] flex items-center">
-                        <h2 className=" font-semibold text-2xl">All Posts : {allPosts?.length}</h2>
+                        <h2 className=" font-semibold text-2xl">All Posts : {postCount}</h2>
 
                         <AwesomeButton
                             type="secondary"
@@ -102,7 +109,13 @@ const Posts = ({ searchText }) => {
 
                     <div>
                         <TabPanel>
-                            <PostSection posts={allPosts}></PostSection>
+                            <PostSection posts={allPosts} pagination={pagination}></PostSection>
+                            <Pagination
+                                hendelPageChange={hendelPageChange}
+                                pages={pages}
+                                currentPage={currentPage}
+                                setCurrentPage={setCurrentPage}
+                            />
                         </TabPanel>
 
                         <TabPanel>
@@ -110,22 +123,20 @@ const Posts = ({ searchText }) => {
                         </TabPanel>
 
                         <TabPanel>
-                            <PostSection posts={react}></PostSection>
+                            <PostSection pagination={pagination} posts={react}></PostSection>
                         </TabPanel>
                         <TabPanel>
-                            <PostSection posts={graphQL}></PostSection>
+                            <PostSection pagination={pagination} posts={graphQL}></PostSection>
                         </TabPanel>
                         <TabPanel>
-                            <PostSection posts={css}></PostSection>
+                            <PostSection pagination={pagination} posts={css}></PostSection>
                         </TabPanel>
                     </div>
 
 
 
                     {/* ++++++++++++++++++  pagination ++++++++++++++++++++++++ */}
-                    {/* */}
-
-                    {postCount > 5 && <div className="join flex mx-auto justify-center space-x-3 mt-10">
+                    {/* <div className="join flex mx-auto justify-center space-x-3 mt-10">
                         <button
                             onClick={() => hendelPageChange('pre')}
                             className="join-item btn btn-outline"
@@ -142,12 +153,13 @@ const Posts = ({ searchText }) => {
                             className="join-item btn btn-outline"
                         >Next</button>
                     </div>
-                    }
+                    
                     <div className="flex justify-center mt-5">
                         <p>Current page : {currentPage}</p>
-                    </div>
+                    </div> */}
 
                 </div>
+
 
 
                 {/* tag and announceMent section */}

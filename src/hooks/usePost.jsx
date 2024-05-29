@@ -13,7 +13,7 @@ const usePost = (searchText, currentPage) => {
         queryFn: async () => {
             
             const res = await axiosPublic.get(`/api/v2/posts?search=${searchText}&page=${currentPage}`);
-            console.log(isLoading);
+            // console.log(isLoading);
             return res.data;
         }
     })
