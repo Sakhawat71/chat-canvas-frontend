@@ -13,8 +13,6 @@ import usePostByTag from "../../../hooks/usePostByTag";
 
 const Posts = ({ searchText }) => {
 
-    // console.log('search text in posts ', searchText);
-
     const [announceCount] = useAnnounceCount(0);
     const [allPosts, setAllPosts] = useState([])
     const [currentPage, setCurrentPage] = useState(1)
@@ -29,11 +27,8 @@ const Posts = ({ searchText }) => {
         if (preOrNext === 'next' && currentPage < pages.length) {
             setCurrentPage(currentPage + 1)
             refetch()
-            // console.log('next', pages.length)
         }
     }
-
-
 
 
     // pagination
@@ -42,31 +37,14 @@ const Posts = ({ searchText }) => {
     const totalPage = Math.ceil(totalPost / itemsParPage)
     const pages = [...Array(totalPage).keys()]
 
-    // console.log('current Page ', currentPage);
-
-
-
-
-    // console.log("posts in usePost hook", posts);
 
     useEffect(() => {
-
-        // if (searchPost.length) {
-        //     setAllPosts(searchPost)
-        // }
-        // else {
         setAllPosts(posts)
-        // }
-        // searchText
     }, [posts, refetch])
 
 
     // tag
 
-    // const node = allPosts.filter(p => p.tag === "Node.js");
-    // const react = allPosts.filter(p => p.tag === "React");
-    // const graphQL = allPosts.filter(p => p.tag === "GraphQL");
-    // const css = allPosts.filter(p => p.tag === "CSS");
     const [node] = usePostByTag('Node.js')
     const [react] = usePostByTag('React')
     const [graphQL] = usePostByTag("GraphQL")
@@ -123,44 +101,17 @@ const Posts = ({ searchText }) => {
                         </TabPanel>
 
                         <TabPanel>
-                            <PostSection pagination={pagination} posts={react}></PostSection>
+                            <PostSection posts={react}></PostSection>
                         </TabPanel>
                         <TabPanel>
-                            <PostSection pagination={pagination} posts={graphQL}></PostSection>
+                            <PostSection posts={graphQL}></PostSection>
                         </TabPanel>
                         <TabPanel>
-                            <PostSection pagination={pagination} posts={css}></PostSection>
+                            <PostSection posts={css}></PostSection>
                         </TabPanel>
                     </div>
-
-
-
-                    {/* ++++++++++++++++++  pagination ++++++++++++++++++++++++ */}
-                    {/* <div className="join flex mx-auto justify-center space-x-3 mt-10">
-                        <button
-                            onClick={() => hendelPageChange('pre')}
-                            className="join-item btn btn-outline"
-                        >Prev</button>
-                        {
-                            pages?.map(page => <button
-                                key={page}
-                                className={currentPage === page + 1 ? `btn join-item bg-[#E58849] text-white` : 'btn join-item'}
-                                onClick={() => setCurrentPage(page + 1)}
-                            >{page + 1}</button>)
-                        }
-                        <button
-                            onClick={() => hendelPageChange('next')}
-                            className="join-item btn btn-outline"
-                        >Next</button>
-                    </div>
-                    
-                    <div className="flex justify-center mt-5">
-                        <p>Current page : {currentPage}</p>
-                    </div> */}
 
                 </div>
-
-
 
                 {/* tag and announceMent section */}
                 <div className="w-1/4 rounded-2xl top-10">
