@@ -1,23 +1,21 @@
 import { BiSolidDownvote, BiSolidUpvote } from "react-icons/bi";
-import { Link, useLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import { CiShoppingTag } from "react-icons/ci";
 import { FacebookIcon, FacebookShareButton, LinkedinIcon, LinkedinShareButton, TwitterIcon, TwitterShareButton, WhatsappIcon, WhatsappShareButton } from "react-share";
-import CommentCard from "../../../../components/CommentCard/CommentCard";
-import useAuth from "../../../../hooks/useAuth";
-import { AwesomeButton } from "react-awesome-button";
+import CommentSection from "../../../../components/CommentSection/CommentSection";
 
 const hostUrl = import.meta.env.VITE_HOST_SITE;
 const PostDetails = () => {
 
-    const user = useAuth()
 
     const postData = useLoaderData([]);
-    const { _id, author, postTime, post, upvote, downvote, tag, comments } = postData;
+    const { _id, author, postTime, post, upvote, downvote, tag } = postData;
     // console.log(postData);
 
     const postDate = postTime.split("T")[0];
     const shareUrl = `${hostUrl}post-details/${_id}`
-    // console.log(shareUrl);
+    // console.log(shareUrl);}
+
 
     return (
         <div className="container mx-auto px-5 bg-stone-50">
@@ -107,58 +105,8 @@ const PostDetails = () => {
 
             </div>
 
-            {/* comment section */}
-            {
-                user?.email
-                    ?
-                    <div className="my-5 p-5 mx-auto border-2 rounded-xl flex-col justify-center items-center">
-
-                        <div className="flex items-center justify-between">
-                            <p className="font-bold">Post Your Comment: </p>
-                            {/* <button className="btn">Post comment</button> */}
-                            <AwesomeButton type="secondary">Post comment</AwesomeButton>
-                        </div>
-
-                        <textarea
-                            className="textarea textarea-bordered flex mx-auto w-3/4 "
-                            placeholder="Your comment..."
-                        ></textarea>
-
-                    </div>
-                    :
-                    <div className=" bg-gray-100 rounded-2xl flex justify-center items-center py-5 my-2">
-
-                        <div className="text-center">
-
-                            <p className="text-red-900 font-semibold text-base py-5">Please login or register to comment</p>
-
-                            <Link to={"/login"} >
-                                <AwesomeButton
-                                    type="secondary"
-                                >LOG IN</AwesomeButton>
-                            </Link>
-
-                        </div>
-
-                    </div>
-            }
-
-            {/* total comment and show comment */}
-            <div className="border p-5">
-
-                <p className="text-xl font-semibold">Comments : {comments?.length}</p>
-
-                {comments?.length ? comments.map((comment, i) => <CommentCard
-                    key={i}
-                    singelComment={comment}
-                ></CommentCard>)
-                    :
-                    <div className="flex justify-center">
-                        <p>No comments have been made so far!</p>
-                    </div>
-                }
-
-            </div>
+            {/* comments section */}
+            <CommentSection postId={_id} />
 
         </div>
     );
