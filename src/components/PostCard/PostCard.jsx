@@ -3,12 +3,13 @@ import { BiDownvote, BiUpvote } from "react-icons/bi";
 import { Link } from 'react-router-dom';
 
 const PostCard = ({ singelPost }) => {
-    // console.log(singelPost);
-    const { author, post, tag, postTime, comments, upvote, downvote } = singelPost;
+    
+    console.log("post card ",singelPost);
+    const { author, post, tag, postTime, upvote, downvote ,commentCount} = singelPost;
 
-    const postDate = postTime.split('T')[0];
+    const postDate = postTime?.split('T')[0];
     const postText = post.description.slice(0, 60);
-    // console.log(postText);
+    console.log("post card",postDate);
 
 
 
@@ -41,7 +42,7 @@ const PostCard = ({ singelPost }) => {
                     <p className='p-1 bg-cyan-100 border rounded-md hover:font-medium'>{tag}</p>
 
                     <p>
-                        {comments ? `${comments?.length} comments` :
+                        {commentCount ? `${commentCount} comments` :
                             '0 comments'
                         }
                     </p>

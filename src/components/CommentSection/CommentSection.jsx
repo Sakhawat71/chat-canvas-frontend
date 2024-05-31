@@ -63,7 +63,7 @@ const CommentSection = ({postId}) => {
                 ></CommentCard>)
                     :
                     <div className="flex justify-center">
-                        <p>No comments have been made so far!</p>
+                        <p>No comments yet!</p>
                     </div>
                 }
 

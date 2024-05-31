@@ -10,11 +10,11 @@ const PostDetails = () => {
 
     const postData = useLoaderData([]);
     const { _id, author, postTime, post, upvote, downvote, tag } = postData;
-    // console.log(postData);
+    // console.log(' post date ',postData);
 
-    const postDate = postTime.split("T")[0];
+    const postDate = postTime?.split("T")[0];
     const shareUrl = `${hostUrl}post-details/${_id}`
-    // console.log(shareUrl);}
+    // console.log("in post details : " ,postDate);
 
 
     return (
