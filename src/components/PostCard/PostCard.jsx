@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 
 const PostCard = ({ singelPost }) => {
     
-    console.log("post card ",singelPost);
+    // console.log("post card ",singelPost);
     const { author, post, tag, postTime, upvote, downvote ,commentCount} = singelPost;
 
     const postDate = postTime?.split('T')[0];
     const postText = post.description.slice(0, 60);
-    console.log("post card",postDate);
+    // console.log("post card",postDate);
 
 
 

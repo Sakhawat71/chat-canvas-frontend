@@ -4,26 +4,63 @@ import { Link } from 'react-router-dom';
 import useComments from '../../hooks/useComments';
 import CommentCard from '../CommentCard/CommentCard';
 import useAuth from '../../hooks/useAuth';
+import toast from 'react-hot-toast';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
-const CommentSection = ({postId}) => {
+const CommentSection = ({ postId }) => {
 
     const user = useAuth()
-    const [comments] = useComments(postId);
-    console.log("api comments", comments);
+    const [comments,refetch] = useComments(postId);
+    const axiosSecure = useAxiosSecure()
 
-    console.log( ' postId' ,postId);
+    console.log("comments", comments);
+
+    const author = {
+        name: user?.displayName,
+        email: user?.email
+    }
+
+    const hendelAddComment = e => {
+        e.preventDefault()
+
+        const commentText = e.target.comment.value;
+        const comment = {
+            commentTime: new Date,
+            content: commentText,
+            author,
+            postId: postId,
+        }
+
+        if (!commentText) {
+            toast.error('Empty Comment Field')
+            return null;
+        }
+
+        axiosSecure.post('/api/v1/add-comment', comment)
+        .then(res => {
+            if(res.data.insertedId){
+                toast.success('Commented ')
+                refetch()
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        })
+        
+        e.target.reset()
+    }
 
     return (
         <div>
             {
                 user?.email
                     ?
-                    <div className="my-5 p-5 mx-auto border-2 rounded-xl flex-col justify-center items-center">
+                    <form onSubmit={hendelAddComment} className="my-5 p-5 mx-auto border-2 rounded-xl flex-col justify-center items-center">
 
                         <div className="flex items-center justify-between">
                             <p className="font-bold">Post Your Comment: </p>
 
-                            <AwesomeButton  type="secondary">Post comment</AwesomeButton>
+                            <AwesomeButton type="secondary">Post comment</AwesomeButton>
                         </div>
 
                         <textarea
@@ -33,7 +70,7 @@ const CommentSection = ({postId}) => {
                             placeholder="Your comment..."
                         ></textarea>
 
-                    </div>
+                    </form>
                     :
                     <div className=" bg-gray-100 rounded-2xl flex justify-center items-center py-5 my-2">
 
@@ -73,7 +110,7 @@ const CommentSection = ({postId}) => {
 };
 
 CommentSection.propTypes = {
-    postId : PropTypes.string.isRequired,
+    postId: PropTypes.string.isRequired,
 };
 
 export default CommentSection;
