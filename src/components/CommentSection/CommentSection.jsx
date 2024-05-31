@@ -39,14 +39,17 @@ const CommentSection = ({ postId }) => {
         axiosSecure.post('/api/v1/add-comment', comment)
         .then(res => {
             if(res.data.insertedId){
-                toast.success('Commented ')
+                toast.success('Comment added successfully !')
                 refetch()
+            }
+            else{
+                toast.error('Failed to add comment.')
             }
         })
         .catch(err => {
             console.log(err)
         })
-        
+
         e.target.reset()
     }
 
