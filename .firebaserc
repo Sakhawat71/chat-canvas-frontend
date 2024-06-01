@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "chat-canvas-71"
-  }
+    "default": "chat-canvas-71",
+    "dist": "chat-canvas-71"
+  },
+  "targets": {},
+  "etags": {}
 }
