@@ -1,0 +1,20 @@
+.card-element {
+    width: 100%;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: all 150ms ease;
+}
+
+.card-element:hover {
+    border-color: #6772e5;
+    box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+}
+
+.card-element:focus {
+    outline: none;
+    border-color: #6772e5;
+    box-shadow: 0 0 0 2px rgba(50, 50, 93, 0.25);
+}
