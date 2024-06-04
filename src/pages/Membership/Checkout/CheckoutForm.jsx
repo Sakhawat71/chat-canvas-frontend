@@ -1,10 +1,31 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import './style.css';
+import { useState } from "react";
+import { useEffect } from "react";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const CheckoutForm = () => {
 
     const stripe = useStripe()
     const elements = useElements()
+    const [clientSecret, setClientSecret] = useState('')
+    const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
+    const axiosSecure = useAxiosSecure();
+
+    const price = 9.99;
+
+    useEffect(() => {
+        try {
+            axiosSecure.post('/api/v1/create-payment-intent', { price })
+                .then(res => {
+                    setClientSecret(res.data.clientSecret)
+                })
+        } catch (error) {
+            console.error('Error fetching client secret:', error);
+        }
+
+    }, [axiosSecure, price])
 
     const handleSubmit = async (event) => {
         // Block native form submission.
@@ -27,16 +48,21 @@ const CheckoutForm = () => {
 
         if (error) {
             console.error('Error creating payment method:', error);
+            setErrorMessage(error.message);
         } else {
             console.log('Payment method created successfully:', paymentMethod);
+            setErrorMessage('')
         }
+
     };
 
     return (
         <form
             onSubmit={handleSubmit}
-            className="w-full md:w-2/3 lg:w-1/2 mt-10 flex-row items-center"
+            className="w-full md:w-2/3 lg:w-1/2 mt-10 flex-row items-center py-5 "
         >
+            <p className="text-center text-green-600">{successMessage}</p>
+
             <CardElement
                 options={{
                     style: {
@@ -69,10 +95,12 @@ const CheckoutForm = () => {
                     },
                 }}
 
-                className="card-element"
+                className="card-element bg-white"
             />
 
-            <button className="btn btn-outline mx-auto flex" type="submit" disabled={!stripe}>
+            <p className="text-center text-red-600">{errorMessage}</p>
+
+            <button className="btn btn-outline mx-auto flex mt-5" type="submit" disabled={!stripe || !clientSecret}>
                 Pay
             </button>
         </form>

@@ -12,7 +12,7 @@ const Membership = () => {
         <div>
 
 
-            <div className="flex justify-center border-4 m-10 ">
+            <div className="flex justify-center border-4 m-10 bg-stone-50 rounded-2xl">
                 <Elements stripe={stripePromise}>
                     <CheckoutForm />
                 </Elements>
