@@ -3,6 +3,8 @@ import './style.css';
 import { useState } from "react";
 import { useEffect } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useUserData from "../../../hooks/useUserData";
+import toast from "react-hot-toast";
 
 const CheckoutForm = () => {
 
@@ -12,6 +14,7 @@ const CheckoutForm = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const axiosSecure = useAxiosSecure();
+    const [user, refetch] = useUserData([]);
 
     const price = 9.99;
 
@@ -27,8 +30,10 @@ const CheckoutForm = () => {
 
     }, [axiosSecure, price])
 
+
+    // from submit function
     const handleSubmit = async (event) => {
-        // Block native form submission.
+
         event.preventDefault();
 
         if (!stripe || !elements) {
@@ -41,6 +46,7 @@ const CheckoutForm = () => {
             return;
         }
 
+        // send card info
         const { error, paymentMethod } = await stripe.createPaymentMethod({
             type: 'card',
             card,
@@ -53,6 +59,40 @@ const CheckoutForm = () => {
             console.log('Payment method created successfully:', paymentMethod);
             setErrorMessage('')
         }
+
+
+        // confirm payment 
+        const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+                card: card,
+                billing_details: {
+                    name : user?.name || 'anonymous',
+                    email : user?.email || 'anonymous',
+                }
+            }
+        })
+        if(confirmError) {
+            console.error('Error for payment :', confirmError);
+            setErrorMessage(confirmError.message);
+        }
+        else{
+            console.log('Payment successfully:', paymentIntent);
+            setErrorMessage('')
+
+            if(paymentIntent.status === "succeeded"){
+                setSuccessMessage('Payment Successful!')
+
+                axiosSecure.patch(`/api/v1/update-user/${user?.email}`)
+                .then(res => {
+                    // console.log(" update user bronge to gold: ",res.data);
+                    if(res.data.modifiedCount === 1){
+                        toast.success("Congratulations! You have successfully purchased the Gold Membership.")
+                        refetch()
+                    }
+                })
+            }
+        }
+
 
     };
 
