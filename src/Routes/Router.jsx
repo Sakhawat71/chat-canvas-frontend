@@ -8,6 +8,7 @@ import HomeLayout from "../pages/Home/HomeLayout/HomeLayout";
 import Membership from "../pages/Membership/Membership";
 import PostDetails from "../pages/Home/Posts/PostDetails/PostDetails";
 import PrivetRoute from "./PrivetRoute";
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
     {
@@ -27,13 +28,13 @@ const router = createBrowserRouter([
             {
                 path: `/post-details/:id`,
                 element: <PostDetails></PostDetails>,
-                loader: ({params}) => fetch(`http://localhost:5000/api/v1/post-details/${params.id}`)
+                loader: ({ params }) => fetch(`http://localhost:5000/api/v1/post-details/${params.id}`)
             }
         ]
     },
     {
-        path:"/login",
-        element: <Login></Login>  
+        path: "/login",
+        element: <Login></Login>
     },
     {
         path: "/register",
@@ -41,8 +42,42 @@ const router = createBrowserRouter([
     },
     {
         path: "/dashboard",
-        element: <Dashboard></Dashboard>,
-        children : [
+        element: <PrivetRoute> <Dashboard></Dashboard> </PrivetRoute>,
+        children: [
+
+
+            // user route
+            {
+                path: "my-profile",
+                element: <div>my Profile</div>
+            },
+            {
+                path: "add-post",
+                element: <div>add post</div>
+            },
+            {
+                path: "my-posts",
+                element: <div>my prots</div>
+            },
+
+
+            // Admin route
+            {
+                path: 'admin-profile',
+                element: <AdminRoute> <div>admin-profile</div> </AdminRoute>
+            },
+            {
+                path: 'manage-users',
+                element: <AdminRoute> <div>manage-users</div> </AdminRoute> 
+            },
+            {
+                path: 'reported-comments',
+                element: <AdminRoute> <div>reported-comments</div> </AdminRoute> 
+            },
+            {
+                path: 'make-announcement',
+                element: <AdminRoute> <div>make-announcement</div> </AdminRoute> 
+            },
             
         ]
     }

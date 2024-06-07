@@ -1,6 +1,6 @@
 import { FadeLoader } from "react-spinners";
 import useAdmin from "../hooks/useAdmin";
-import { NavLink } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
 
@@ -11,39 +11,39 @@ const Dashboard = () => {
 
     const adminLink = <>
         <li>
-            <NavLink className={({ isActive, isPending }) =>
+            <NavLink to={'admin-profile'} className={({ isActive, isPending }) =>
                 isPending ? "pending" : isActive ? "text-[#44b584] font-semibold" : "text-black"
             }>
                 Admin Profile
             </NavLink>
         </li>
         <li>
-            <NavLink className={({ isActive, isPending }) =>
+            <NavLink to={'manage-users'} className={({ isActive, isPending }) =>
                 isPending ? "pending" : isActive ? "text-[#44b584] font-semibold" : "text-black"
             }>
                 Manage Users
             </NavLink>
         </li>
         <li>
-            <NavLink className={({ isActive, isPending }) =>
+            <NavLink to={'reported-comments'} className={({ isActive, isPending }) =>
                 isPending ? "pending" : isActive ? "text-[#44b584] font-semibold" : "text-black"
             }>
                 Reported Comments
             </NavLink>
         </li>
         <li>
-            <NavLink className={({ isActive, isPending }) =>
+            <NavLink to={'make-announcement'} className={({ isActive, isPending }) =>
                 isPending ? "pending" : isActive ? "text-[#44b584] font-semibold" : "text-black"
             }>
                 Make Announcement
             </NavLink>
         </li>
     </>
-    
+
     const userLink = <>
 
         <li>
-            <NavLink className={({ isActive, isPending }) =>
+            <NavLink to={'my-profile'} className={({ isActive, isPending }) =>
                 isPending ? "pending" : isActive ? "text-[#44b584] font-semibold" : "text-black"
             }>
                 My Profile
@@ -51,7 +51,7 @@ const Dashboard = () => {
         </li>
 
         <li>
-            <NavLink className={({ isActive, isPending }) =>
+            <NavLink to={'add-post'} className={({ isActive, isPending }) =>
                 isPending ? "pending" : isActive ? "text-[#44b584] font-semibold" : "text-black"
             }>
                 Add Post
@@ -59,7 +59,7 @@ const Dashboard = () => {
         </li>
 
         <li>
-            <NavLink className={({ isActive, isPending }) =>
+            <NavLink to={'my-posts'} className={({ isActive, isPending }) =>
                 isPending ? "pending" : isActive ? "text-[#44b584] font-semibold" : "text-black"
             }>
                 My Posts
@@ -75,13 +75,18 @@ const Dashboard = () => {
     }
 
     return (
-        <div>
+        <div className="flex border-2">
 
-            <ul className="space-y-3">
-                {adminLink}
-                {userLink}
-            </ul>
+            <div className="w-1/4">
+                <ul className="space-y-3">
+                    {isAdmin && adminLink}
+                    {userLink}
+                </ul>
+            </div>
 
+            <div className="w-3/4 border-2">
+                <Outlet></Outlet>
+            </div>
         </div>
     );
 };
