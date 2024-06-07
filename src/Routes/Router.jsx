@@ -9,6 +9,9 @@ import Membership from "../pages/Membership/Membership";
 import PostDetails from "../pages/Home/Posts/PostDetails/PostDetails";
 import PrivetRoute from "./PrivetRoute";
 import AdminRoute from "./AdminRoute";
+import UserProfile from "../pages/Dashboard/User/userProfile/UserProfile";
+import AddPost from "../pages/Dashboard/User/AddPost/AddPost";
+import MyPosts from "../pages/Dashboard/User/MyPosts/MyPosts";
 
 const router = createBrowserRouter([
     {
@@ -49,15 +52,15 @@ const router = createBrowserRouter([
             // user route
             {
                 path: "my-profile",
-                element: <div>my Profile</div>,
+                element: <UserProfile />,
             },
             {
                 path: "add-post",
-                element: <div>add post</div>
+                element: <AddPost />
             },
             {
                 path: "my-posts",
-                element: <div>my prots</div>
+                element: <MyPosts />
             },
 
 
