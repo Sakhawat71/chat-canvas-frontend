@@ -75,16 +75,23 @@ const Dashboard = () => {
     }
 
     return (
-        <div className="flex border-2">
+        <div className="flex border-2 gap-10">
 
-            <div className="w-1/4">
+            <div className="w-1/6 border-2 h-screen">
+                <div>
+                    <figure >
+                        <img src="/src/assets/canvas-logo.png" alt="logo" className="w-10" />
+                        <p>Chat Canvas</p>
+                    </figure>
+                </div>
+
                 <ul className="space-y-3">
                     {isAdmin && adminLink}
                     {userLink}
                 </ul>
             </div>
 
-            <div className="w-3/4 border-2">
+            <div className="w-5/6 border-2">
                 <Outlet></Outlet>
             </div>
         </div>

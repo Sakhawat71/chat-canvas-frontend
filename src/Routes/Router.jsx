@@ -49,7 +49,7 @@ const router = createBrowserRouter([
             // user route
             {
                 path: "my-profile",
-                element: <div>my Profile</div>
+                element: <div>my Profile</div>,
             },
             {
                 path: "add-post",
