@@ -1,11 +1,15 @@
 import { useForm } from "react-hook-form";
 import useUserData from "../../../../hooks/useUserData";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const AddPost = () => {
 
-    const { register, handleSubmit } = useForm()
+    const { register, handleSubmit ,reset} = useForm()
     const [user] = useUserData()
-    // console.log(user);
+    const axiosSecure = useAxiosSecure()
+    const navigate = useNavigate()
 
     const author = {
         image : user?.image,
@@ -27,8 +31,12 @@ const AddPost = () => {
             postTime: new Date,
         }
 
-        console.log(postData);
-
+        const res  = await axiosSecure.post('/api/v1/add-post', postData)
+        if(res.data.insertedId){
+            reset()
+            toast.success("Post submitted successfully!")
+            navigate('/dashboard/my-posts')
+        }
     }
 
     return (
@@ -66,12 +74,17 @@ const AddPost = () => {
                             defaultValue={"disabled"}
                         >
 
-                            <option disabled selected value="disabled">TAG</option>
-                            <option value="salad">Salad</option>
-                            <option value="pissa">Pissa</option>
-                            <option value="soup">Soup</option>
-                            <option value="drinks">Drinks</option>
-                            <option value="dessert">Dessert</option>
+                            {/* <option disabled selected value="disabled">TAG</option> */}
+                            <option value="React">React</option>
+                            <option value="Node.js">Node.js</option>
+                            <option value="CSS">CSS</option>
+                            <option value="Database">Database</option>
+                            <option value="express.js">express.js</option>
+                            <option value="Backend">Backend</option>
+                            <option value="FrontEnd">FrontEnd</option>
+                            <option value="bug">Bug</option>
+                            <option value="new">what`s new</option>
+                            <option value="ai">Ai</option>
 
                         </select>
                     </label>

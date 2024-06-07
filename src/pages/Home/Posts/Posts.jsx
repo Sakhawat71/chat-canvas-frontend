@@ -47,7 +47,13 @@ const Posts = ({ searchText }) => {
 
     const [node] = usePostByTag('Node.js')
     const [react] = usePostByTag('React')
-    const [graphQL] = usePostByTag("GraphQL")
+    const [ai] = usePostByTag("Ai")
+    const [database] = usePostByTag("Database")
+    const [express] = usePostByTag("express.js")
+    const [backend] = usePostByTag("Backend")
+    const [frontEnd] = usePostByTag("FrontEnd")
+    const [bug] = usePostByTag("bug")
+    const [whatsNew] = usePostByTag("new")
     const [css] = usePostByTag("CSS")
 
 
@@ -68,6 +74,7 @@ const Posts = ({ searchText }) => {
                         <h2 className=" font-semibold text-2xl">All Posts : {postCount}</h2>
 
                         <AwesomeButton
+                            href="/dashboard/add-post"
                             type="secondary"
                             className="bg-[#cbffe9]"
                         >Post now</AwesomeButton>
@@ -104,11 +111,30 @@ const Posts = ({ searchText }) => {
                             <PostSection posts={react}></PostSection>
                         </TabPanel>
                         <TabPanel>
-                            <PostSection posts={graphQL}></PostSection>
+                            <PostSection posts={ai}></PostSection>
                         </TabPanel>
                         <TabPanel>
                             <PostSection posts={css}></PostSection>
                         </TabPanel>
+                        <TabPanel>
+                            <PostSection posts={database}></PostSection>
+                        </TabPanel>
+                        <TabPanel>
+                            <PostSection posts={express}></PostSection>
+                        </TabPanel>
+                        <TabPanel>
+                            <PostSection posts={backend}></PostSection>
+                        </TabPanel>
+                        <TabPanel>
+                            <PostSection posts={frontEnd}></PostSection>
+                        </TabPanel>
+                        <TabPanel>
+                            <PostSection posts={bug}></PostSection>
+                        </TabPanel>
+                        <TabPanel>
+                            <PostSection posts={whatsNew}></PostSection>
+                        </TabPanel>
+
                     </div>
 
                 </div>
@@ -122,8 +148,14 @@ const Posts = ({ searchText }) => {
                         <Tab className='hover:bg-lime-200 p-1 rounded-lg'>All Posts</Tab>
                         <Tab className='hover:bg-lime-200 p-1 rounded-lg'>Node.js</Tab>
                         <Tab className='hover:bg-lime-200 p-1 rounded-lg'>React</Tab>
-                        <Tab className='hover:bg-lime-200 p-1 rounded-lg'>GraphQL</Tab>
+                        <Tab className='hover:bg-lime-200 p-1 rounded-lg'>Ai</Tab>
                         <Tab className='hover:bg-lime-200 p-1 rounded-lg'>CSS</Tab>
+                        <Tab className='hover:bg-lime-200 p-1 rounded-lg'>Database</Tab>
+                        <Tab className='hover:bg-lime-200 p-1 rounded-lg'>Express.js</Tab>
+                        <Tab className='hover:bg-lime-200 p-1 rounded-lg'>Backend</Tab>
+                        <Tab className='hover:bg-lime-200 p-1 rounded-lg'>FrontEnd</Tab>
+                        <Tab className='hover:bg-lime-200 p-1 rounded-lg'>Bug</Tab>
+                        <Tab className='hover:bg-lime-200 p-1 rounded-lg'>What`s New</Tab>
 
                     </TabList>
 
