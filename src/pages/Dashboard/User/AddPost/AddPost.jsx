@@ -3,18 +3,22 @@ import useUserData from "../../../../hooks/useUserData";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import useMyPosts from "../../../../hooks/useMyPosts"
+import LimitPosts from "../../../../components/LimitPosts/LimitPosts";
 
 const AddPost = () => {
 
-    const { register, handleSubmit ,reset} = useForm()
+    const { register, handleSubmit, reset } = useForm()
     const [user] = useUserData()
     const axiosSecure = useAxiosSecure()
     const navigate = useNavigate()
+    const [, postCount] = useMyPosts(user?.email)
+    // console.log(user.badge);
 
     const author = {
-        image : user?.image,
-        name : user?.name,
-        email : user?.email
+        image: user?.image,
+        name: user?.name,
+        email: user?.email
     }
 
     const onSubmit = async (info) => {
@@ -31,21 +35,47 @@ const AddPost = () => {
             postTime: new Date,
         }
 
-        const res  = await axiosSecure.post('/api/v1/add-post', postData)
-        if(res.data.insertedId){
+        const res = await axiosSecure.post('/api/v1/add-post', postData)
+        if (res.data.insertedId) {
             reset()
             toast.success("Post submitted successfully!")
             navigate('/dashboard/my-posts')
         }
     }
 
+    let limit;
+
+    if (user.badge === "bronze") {
+        limit = 5;
+        console.log('your post limite 5');
+        console.log('your post : ', postCount);
+        console.log('post left : ', limit - postCount);
+
+        if (postCount < limit) {
+            console.log('you can post now');
+        }
+        else {
+            console.log('your limet is over ');
+            return < LimitPosts limit={limit} postCount={postCount} />
+        }
+
+    }
+
     return (
         <div>
+            <div>
+                <p>your post limit : {limit}</p>
+                <p>your post : {postCount}</p>
+                <p>post left : {limit - postCount}</p>
+            </div>
+
             <form
                 onSubmit={handleSubmit(onSubmit)}
                 className="bg-[#F3F3F3] p-10 rounded-lg" >
 
-
+                <div className="text-center">
+                    add now post
+                </div>
                 {/* ****** Post Title ****** */}
                 <label className="space-y-3">
 
@@ -60,7 +90,7 @@ const AddPost = () => {
                     />
                 </label>
 
-                <div className="flex items-center gap-10 mt-4">
+                {/* <div className="flex items-center gap-10 mt-4"> */}
 
                     {/* ***** tag ***** */}
                     <label className="space-y-3 w-1/2">
@@ -88,7 +118,7 @@ const AddPost = () => {
 
                         </select>
                     </label>
-                </div>
+                {/* </div> */}
 
                 {/* ************ Post Description ************* */}
                 <label className="form-control space-y-3 mt-2 w-full ">
