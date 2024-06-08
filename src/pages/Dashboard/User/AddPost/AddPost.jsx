@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import useMyPosts from "../../../../hooks/useMyPosts"
 import LimitPosts from "../../../../components/LimitPosts/LimitPosts";
+import { AwesomeButton } from "react-awesome-button";
 
 const AddPost = () => {
 
@@ -56,26 +57,32 @@ const AddPost = () => {
         }
         else {
             console.log('your limet is over ');
-            return < LimitPosts limit={limit} postCount={postCount} />
+            return <LimitPosts />
         }
 
     }
 
     return (
-        <div>
-            <div>
-                <p>your post limit : {limit}</p>
-                <p>your post : {postCount}</p>
-                <p>post left : {limit - postCount}</p>
-            </div>
-
+        <div className="p-5">
             <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="bg-[#F3F3F3] p-10 rounded-lg" >
+                className=" p-2 rounded-lg" >
 
-                <div className="text-center">
-                    add now post
-                </div>
+                {user?.badge === 'bronze' && (
+                    <div className="flex w-full pb-5">
+                        <div className="grid h-20 flex-grow card bg-gradient-to-r from-yellow-50 to-yellow-100 text-black rounded-lg shadow-lg place-items-center">
+                            <p className="text-lg font-semibold">Your Post Limit: <span className="font-bold">{limit}</span></p>
+                        </div>
+                        <div className="divider divider-horizontal"></div>
+                        <div className="grid h-20 flex-grow card bg-gradient-to-r from-blue-50 to-blue-100 text-black rounded-lg shadow-lg place-items-center">
+                            <p className="text-lg font-semibold">Your Posts: <span className="font-bold">{postCount}</span></p>
+                        </div>
+                    </div>
+                )}
+
+
+                <h2 className="text-2xl font-semibold text-center">Add Now Post</h2>
+
                 {/* ****** Post Title ****** */}
                 <label className="space-y-3">
 
@@ -90,12 +97,12 @@ const AddPost = () => {
                     />
                 </label>
 
-                {/* <div className="flex items-center gap-10 mt-4"> */}
+                <div className="flex items-center gap-10 mt-4">
 
                     {/* ***** tag ***** */}
-                    <label className="space-y-3 w-1/2">
+                    <label className="space-y-3 w-1/3 flex">
                         <div className="label">
-                            <span className="label-text text-xl font-semibold">Tag*</span>
+                            <span className="label-text text-xl font-semibold pr-2">Tag*: </span>
                         </div>
                         <select
                             {...register("tag")}
@@ -118,7 +125,7 @@ const AddPost = () => {
 
                         </select>
                     </label>
-                {/* </div> */}
+                </div>
 
                 {/* ************ Post Description ************* */}
                 <label className="form-control space-y-3 mt-2 w-full ">
@@ -136,14 +143,15 @@ const AddPost = () => {
 
 
                 <button
-                    className="btn bg-gradient-to-r from-[#835D23] to-[#B58130] text-white font-bold text-xl mt-5"
+                    className="mt-5"
                     type="submit"
                 >
-                    Post
+                    <AwesomeButton className="w-28" type="secondary" >Post</AwesomeButton>
                 </button>
 
             </form>
         </div>
+
     );
 };
 
