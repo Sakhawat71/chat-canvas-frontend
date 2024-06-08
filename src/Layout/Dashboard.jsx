@@ -76,9 +76,9 @@ const Dashboard = () => {
     }
 
     return (
-        <div className="flex gap-10 container mx-auto font-sans">
+        <div className="flex gap-10 container mx-auto ">
 
-            <div className="w-3/12 h-screen pt-10 bg-slate-50">
+            <div className="w-3/12 h-screen pt-10 bg-slate-50 shadow-2xl rounded-2xl font-roboto">
                 <Link to="/">
                     <figure className=" mx-auto text-center">
                         <img
@@ -88,24 +88,31 @@ const Dashboard = () => {
                     </figure>
                 </Link>
 
-                <ul className="space-y-3 py-10 ml-5 font-semibold text-xl ">
-                    
-                    <hr />
+                <ul className="space-y-3 py-10 mx-5 font-semibold text-xl ">
+
+
+                    {isAdmin && <div>
+                        <hr />
+                        <p className="text-2xl font-semibold text-gray-400 text-center uppercase">Admin</p>
+                        <hr />
+                    </div>}
 
                     {isAdmin && adminLink}
 
                     <hr className="py-2" />
+                    <hr />
 
                     {userLink}
 
                     <hr className=" py-2" />
+                    <hr />
 
                 </ul>
             </div>
 
-            <div className="w-9/12 bg-slate-50">
+            <main className="w-9/12 bg-slate-50 shadow-2xl rounded-2xl">
                 <Outlet></Outlet>
-            </div>
+            </main>
         </div>
     );
 };

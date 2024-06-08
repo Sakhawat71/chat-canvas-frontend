@@ -8,6 +8,10 @@ export default {
     extend: {
       colors: {
         canvasThem: '#44B584'
+      },
+      fontFamily : {
+        'poppins' : "'Poppins', sans-serif",
+        'roboto' : "'Roboto', sans-serif"
       }
     },
   },
