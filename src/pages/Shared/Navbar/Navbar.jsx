@@ -142,7 +142,7 @@ const Navbar = () => {
                                 </p>
 
                                 <li className="hover:font-bold">
-                                    <Link to="/dashboard">
+                                    <Link to="/dashboard/my-profile">
                                         <MdDashboard />
                                         Dashboard</Link>
                                 </li>
