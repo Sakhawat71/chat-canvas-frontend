@@ -13,6 +13,8 @@ import UserProfile from "../pages/Dashboard/User/userProfile/UserProfile";
 import AddPost from "../pages/Dashboard/User/AddPost/AddPost";
 import MyPosts from "../pages/Dashboard/User/MyPosts/MyPosts";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers/ManageUsers";
+import AdminProfile from "../pages/Dashboard/Admin/AdminProfile/AdminProfile";
+import ReportedComments from "../pages/Dashboard/Admin/ReportedComments/ReportedComments";
 
 const router = createBrowserRouter([
     {
@@ -68,7 +70,7 @@ const router = createBrowserRouter([
             // Admin route
             {
                 path: 'admin-profile',
-                element: <AdminRoute> <div>admin-profile</div> </AdminRoute>
+                element: <AdminRoute> <AdminProfile /> </AdminRoute>
             },
             {
                 path: 'manage-users',
@@ -76,11 +78,11 @@ const router = createBrowserRouter([
             },
             {
                 path: 'reported-comments',
-                element: <AdminRoute> <div>reported-comments</div> </AdminRoute> 
+                element: <AdminRoute> <ReportedComments /> </AdminRoute> 
             },
             {
                 path: 'make-announcement',
-                element: <AdminRoute> <div>make-announcement</div> </AdminRoute> 
+                element: <AdminRoute>  </AdminRoute> 
             },
             
         ]
