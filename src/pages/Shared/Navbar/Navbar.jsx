@@ -36,7 +36,7 @@ const Navbar = () => {
             .catch(error => console.log('log out error :', error))
     }
 
-    const [announceCount] = useAnnounceCount(0);
+    const [announceCount = 0] = useAnnounceCount(0);
     // console.log(announceCount);
 
     const navLink = <>

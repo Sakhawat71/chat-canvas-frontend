@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 const MakeAnnounce = () => {
 
     const user = useAuth()
+    // console.log(user);
     const axiosSecure = useAxiosSecure();
 
     const { register, handleSubmit, formState: { errors } ,reset } = useForm();
@@ -14,7 +15,7 @@ const MakeAnnounce = () => {
 
         const announceData = {
             name: user?.displayName,
-            email: user?.email,
+            photo: user?.photoURL,
             title : data.title,
             description : data.description,
             time : new Date
