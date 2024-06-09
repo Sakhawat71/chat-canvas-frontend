@@ -15,6 +15,7 @@ import MyPosts from "../pages/Dashboard/User/MyPosts/MyPosts";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers/ManageUsers";
 import AdminProfile from "../pages/Dashboard/Admin/AdminProfile/AdminProfile";
 import ReportedComments from "../pages/Dashboard/Admin/ReportedComments/ReportedComments";
+import MakeAnnounce from "../pages/Dashboard/Admin/MakeAnnounce/MakeAnnounce";
 
 const router = createBrowserRouter([
     {
@@ -82,7 +83,7 @@ const router = createBrowserRouter([
             },
             {
                 path: 'make-announcement',
-                element: <AdminRoute>  </AdminRoute> 
+                element: <AdminRoute> <MakeAnnounce /> </AdminRoute> 
             },
             
         ]
