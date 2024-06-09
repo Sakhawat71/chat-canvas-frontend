@@ -3,9 +3,13 @@ import useAnnounce from "../../../hooks/useAnnounce";
 
 const Announcement = () => {
 
-    const [announceData] = useAnnounce()
+    const [announceData] = useAnnounce();
     const announce = announceData ? announceData[0] : [];
-    const {photo,name,title,description} = announce;
+    const { photo, name, title, description } = announce;
+
+    const sliceTitel = title?.slice(0, 50);
+    const sliceName = name?.slice(0, 19);
+    const sliceDescription = description?.slice(0, 150);
 
     return (
         <div>
@@ -25,11 +29,17 @@ const Announcement = () => {
                             </figure>
                         </div>
                         <div className="ml-4">
-                            <h2 className="text-lg font-semibold">{name}</h2>
+                            <h2 className="text-lg font-semibold">
+                                {name?.length < 19 ? name : <span>{sliceName} ...</span> }
+                            </h2>
                         </div>
                     </div>
-                    <h2 className="card-title">{title}</h2>
-                    <p>{description}</p>
+                    <h2 className="card-title">
+                        {title?.length < 50 ? title : <span>{sliceTitel}...</span>}
+                    </h2>
+                    <p>
+                        {description?.length < 150 ? description : <span>{sliceDescription} ...</span>}
+                    </p>
                 </div>
             </div>
 
