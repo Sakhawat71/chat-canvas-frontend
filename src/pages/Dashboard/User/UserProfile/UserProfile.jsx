@@ -1,16 +1,21 @@
+import { Link } from "react-router-dom";
 import useMyPosts from "../../../../hooks/useMyPosts";
 import useUserData from "../../../../hooks/useUserData";
+import RecentPosts from "../../../../components/RecentPosts/RecentPosts";
 
 const UserProfile = () => {
 
     const [userData] = useUserData();
     const { badge, creationTime, email, image, name } = userData;
-    const date = creationTime.slice(0, 16);
-    const [{posts}] = useMyPosts();
-    // console.log(posts);
+    const date = creationTime?.slice(0, 16);
+    const [{ posts }] = useMyPosts();
+    const recentPosts = posts?.slice(0, 3)
+    recentPosts?.map(post => console.log(post))
+    // console.log(recentPosts);
 
     return (
-        <div className="w-full p-5 flex items-center justify-center ">
+        <div className="w-full p-5 ">
+
             <div className="w-full max-w-6xl p-6 bg-white border border-gray-200 rounded-lg shadow-md flex flex-col md:flex-row items-center md:items-start">
                 <div className="flex-shrink-0 md:w-1/3 flex justify-center md:justify-start mb-6 md:mb-0">
                     <img
@@ -30,9 +35,30 @@ const UserProfile = () => {
                 </div>
             </div>
 
-            <div>
+            <div className="overflow-x-auto mt-20 mb-10">
 
+                <h2 className="text-xl font-bold font-mono">My 3 Recent Posts</h2>
+
+                <table className="table table-zebra">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Tag</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            recentPosts?.map(post => <RecentPosts key={post._id} post={post} />)
+                        }
+                    </tbody>
+                </table>
             </div>
+
+            {
+                posts?.length > 3 &&
+                <Link className="btn flex" to="/dashboard/my-posts">See All Post</Link>
+            }
 
         </div>
     );

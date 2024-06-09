@@ -33,7 +33,6 @@ const Login = () => {
         SignInEmailPass(email, password)
             .then(res => {
                 const loggedUser = res.user;
-                // console.log('loggedUser : ',loggedUser);
                 navigate("/")
                 toast.success(`Welcome Back , ${loggedUser?.displayName}`)
             })
@@ -44,7 +43,6 @@ const Login = () => {
             })
 
     }
-
 
 
     return (
