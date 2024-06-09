@@ -13,8 +13,7 @@ const AddPost = () => {
     const [user] = useUserData()
     const axiosSecure = useAxiosSecure()
     const navigate = useNavigate()
-    const [, postCount] = useMyPosts(user?.email)
-    // console.log(user.badge);
+    const [, postCount] = useMyPosts()
 
     const author = {
         image: user?.image,
@@ -48,18 +47,13 @@ const AddPost = () => {
 
     if (user.badge === "bronze") {
         limit = 5;
-        console.log('your post limite 5');
-        console.log('your post : ', postCount);
-        console.log('post left : ', limit - postCount);
 
         if (postCount < limit) {
             console.log('you can post now');
         }
         else {
-            console.log('your limet is over ');
             return <LimitPosts />
         }
-
     }
 
     return (

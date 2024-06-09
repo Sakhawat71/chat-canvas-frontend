@@ -12,7 +12,7 @@ const LimitPosts = () => {
 
                         <p className="py-6">You have reached your posting limit for the Bronze Membership. To post more, consider upgrading to our Gold Membership and enjoy unlimited posts along with many other benefits!</p>
 
-                        <Link to='/membership' className="btn bg-[#ddca3d]">Upgrade to <span className='text-black'>Gold Membership</span></Link>
+                        <Link to='/membership' className="btn font-semibold text-lg bg-[#ddca3d]">Become a <span className='text-black'>Member</span></Link>
                     </div>
                 </div>
             </div>

@@ -1,11 +1,13 @@
+import useMyPosts from "../../../../hooks/useMyPosts";
 import useUserData from "../../../../hooks/useUserData";
 
 const UserProfile = () => {
 
     const [userData] = useUserData();
     const { badge, creationTime, email, image, name } = userData;
-    const date = creationTime.slice(0,16)
-    // console.log(date);
+    const date = creationTime.slice(0, 16);
+    const [{posts}] = useMyPosts();
+    // console.log(posts);
 
     return (
         <div className="w-full p-5 flex items-center justify-center ">
@@ -27,8 +29,12 @@ const UserProfile = () => {
                     </div>
                 </div>
             </div>
-        </div>
 
+            <div>
+
+            </div>
+
+        </div>
     );
 };
 
