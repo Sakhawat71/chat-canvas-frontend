@@ -89,13 +89,15 @@ const AdminProfile = () => {
                 </div>
             </div>
 
-            <div className="w-full max-w-6xl bg-white p-6 rounded-lg shadow-md mx-auto border ">
+            <div className="w-full max-w-6xl bg-white p-6 rounded-lg shadow-md mx-auto border flex justify-center">
+
                 <ReactApexChart
                     options={chartOptions}
                     series={chartSeries}
                     type="pie"
-                    width={380}
+                    width={400}
                 />
+
             </div>
 
         </div>
