@@ -2,17 +2,44 @@ import { FaRegCommentDots, FaRegUser } from "react-icons/fa";
 import useAdminStats from "../../../../hooks/useAdminStats";
 import useUserData from "../../../../hooks/useUserData";
 import { MdOutlineArticle } from "react-icons/md";
+import ReactApexChart from "react-apexcharts";
 
 const AdminProfile = () => {
 
     const [stats] = useAdminStats();
     const [userData] = useUserData();
 
+
+    const chartOptions = {
+        chart: {
+            type: 'pie',
+        },
+        labels: ['Posts', 'Comments', 'Users'],
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                chart: {
+                    width: 300
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }]
+    };
+
+    const chartSeries = [
+        stats?.NumOfPosts || 0,
+        stats?.NumOfComments || 0,
+        stats?.NumOfUser || 0
+    ];
+
+
     return (
         <div className="h-screen">
 
             <div className="w-full max-w-6xl bg-[#F8FAFC] border rounded-lg shadow-md flex flex-col items-center p-6">
-                
+
                 <div className="flex justify-center mb-6">
                     <img
                         src={userData?.image}
@@ -60,6 +87,15 @@ const AdminProfile = () => {
                     </div>
 
                 </div>
+            </div>
+
+            <div className="w-full max-w-6xl bg-white p-6 rounded-lg shadow-md mx-auto border ">
+                <ReactApexChart
+                    options={chartOptions}
+                    series={chartSeries}
+                    type="pie"
+                    width={380}
+                />
             </div>
 
         </div>
