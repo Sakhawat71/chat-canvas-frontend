@@ -26,7 +26,7 @@ const router = createBrowserRouter([
             {
                 path: '/',
                 element: <HomeLayout></HomeLayout>,
-                loader: () => fetch(`http://localhost:5000/api/v1/post-count`)
+                loader: () => fetch(`https://canvas-server.vercel.app/api/v1/post-count`)
             },
             {
                 path: "/membership",
@@ -35,7 +35,7 @@ const router = createBrowserRouter([
             {
                 path: `/post-details/:id`,
                 element: <PostDetails></PostDetails>,
-                loader: ({ params }) => fetch(`http://localhost:5000/api/v1/post-details/${params.id}`)
+                loader: ({ params }) => fetch(`https://canvas-server.vercel.app/api/v1/post-details/${params.id}`)
             }
         ]
     },
