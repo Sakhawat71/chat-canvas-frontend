@@ -2,6 +2,11 @@ import { FadeLoader } from "react-spinners";
 import useAdmin from "../hooks/useAdmin";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import logo from "../assets/canvas-logo.png"
+import { CgProfile } from "react-icons/cg";
+import { MdOutlineArticle, MdOutlineManageAccounts, MdPostAdd } from "react-icons/md";
+import { FaCommentSlash, FaUsers } from "react-icons/fa";
+import { TfiAnnouncement } from "react-icons/tfi";
+
 
 const Dashboard = () => {
 
@@ -15,28 +20,40 @@ const Dashboard = () => {
             <NavLink to={'admin-profile'} className={({ isActive, isPending }) =>
                 isPending ? "pending" : isActive ? "text-[#44b584] font-semibold" : "text-gray-700"
             }>
-                Admin Profile
+                <span className="flex items-center gap-2">
+                    <MdOutlineManageAccounts />
+                    Admin Profile
+                </span>
             </NavLink>
         </li>
         <li>
             <NavLink to={'manage-users'} className={({ isActive, isPending }) =>
                 isPending ? "pending" : isActive ? "text-[#44b584] font-semibold" : "text-gray-700"
             }>
-                Manage Users
+                <span className="flex items-center gap-2">
+                    <FaUsers />
+                    Manage Users
+                </span>
             </NavLink>
         </li>
         <li>
             <NavLink to={'reported-comments'} className={({ isActive, isPending }) =>
                 isPending ? "pending" : isActive ? "text-[#44b584] font-semibold" : "text-gray-700"
             }>
-                Reported Comments
+                <span className="flex items-center gap-2">
+                    <FaCommentSlash />
+                    Reported Comments
+                </span>
             </NavLink>
         </li>
         <li>
             <NavLink to={'make-announcement'} className={({ isActive, isPending }) =>
                 isPending ? "pending" : isActive ? "text-[#44b584] font-semibold" : "text-gray-700"
             }>
-                Make Announcement
+                <span className="flex items-center gap-2">
+                    < TfiAnnouncement />
+                    Announcement
+                </span>
             </NavLink>
         </li>
     </>
@@ -47,7 +64,11 @@ const Dashboard = () => {
             <NavLink to={'my-profile'} className={({ isActive, isPending }) =>
                 isPending ? "pending" : isActive ? "text-[#44b584] font-semibold" : "text-gray-700"
             }>
-                My Profile
+
+                <span className="flex items-center gap-2">
+                    <CgProfile />
+                    My Profile
+                </span>
             </NavLink>
         </li>
 
@@ -55,7 +76,10 @@ const Dashboard = () => {
             <NavLink to={'add-post'} className={({ isActive, isPending }) =>
                 isPending ? "pending" : isActive ? "text-[#44b584] font-semibold" : "text-gray-700"
             }>
-                Add Post
+                <span className="flex items-center gap-2">
+                    <MdPostAdd />
+                    Add Post
+                </span>
             </NavLink>
         </li>
 
@@ -63,7 +87,10 @@ const Dashboard = () => {
             <NavLink to={'my-posts'} className={({ isActive, isPending }) =>
                 isPending ? "pending" : isActive ? "text-[#44b584] font-semibold" : "text-gray-700"
             }>
-                My Posts
+                <span className="flex items-center gap-2">
+                    <MdOutlineArticle />
+                    My Posts
+                </span>
             </NavLink>
         </li>
 

@@ -75,7 +75,7 @@ const AddPost = () => {
                 )}
 
 
-                <h2 className="text-2xl font-semibold text-center">Add Now Post</h2>
+                <h2 className="text-2xl font-semibold text-center font-mono">Add Now Post</h2>
 
                 {/* ****** Post Title ****** */}
                 <label className="space-y-3">
