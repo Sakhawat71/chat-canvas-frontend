@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import useMyPosts from "../../../../hooks/useMyPosts";
 import useUserData from "../../../../hooks/useUserData";
 import RecentPosts from "../../../../components/RecentPosts/RecentPosts";
+import { RiVerifiedBadgeFill } from "react-icons/ri";
 
 const UserProfile = () => {
 
@@ -10,8 +11,6 @@ const UserProfile = () => {
     const date = creationTime?.slice(0, 16);
     const [{ posts }] = useMyPosts();
     const recentPosts = posts?.slice(0, 3)
-    recentPosts?.map(post => console.log(post))
-    // console.log(recentPosts);
 
     return (
         <div className="w-full p-5 ">
@@ -26,7 +25,12 @@ const UserProfile = () => {
                 </div>
                 <div className="md:w-2/3 md:pl-10">
                     <h1 className="text-4xl font-semibold text-gray-800 mb-4">{name}</h1>
-                    <p className="text-xl text-gray-500 mb-2">Badge: {badge}</p>
+                    <p className="text-xl text-gray-500 mb-2 flex items-center">
+                        Badge: {badge}
+                        <RiVerifiedBadgeFill 
+                        className={badge === 'gold' ? 'text-[#F5CE2A] ml-2' : 'text-[#A26D41] ml-2' }
+                        />
+                    </p>
                     <p className="text-lg text-gray-600 mb-4">Email: {email}</p>
                     <div className="flex items-center bg-gray-100 rounded-full px-4 py-1 text-lg text-gray-600 gap-4">
                         <span>Member Since:</span>
