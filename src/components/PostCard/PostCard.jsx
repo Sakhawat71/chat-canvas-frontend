@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
 import { BiDownvote, BiUpvote } from "react-icons/bi";
+import { CiShoppingTag } from 'react-icons/ci';
 import { Link } from 'react-router-dom';
 
 const PostCard = ({ singelPost }) => {
-    
+
     // console.log("post card ",singelPost);
-    const { author, post, tag, postTime, upvote, downvote ,commentCount} = singelPost;
+    const { author, post, tag, postTime, upvote, downvote, commentCount } = singelPost;
 
     const postDate = postTime?.split('T')[0];
     const postText = post.description.slice(0, 60);
@@ -39,7 +40,10 @@ const PostCard = ({ singelPost }) => {
                         <BiDownvote />
                     </div>
 
-                    <p className='p-1 bg-cyan-100 border rounded-md hover:font-medium'>{tag}</p>
+                    <p className='p-1 bg-cyan-100 border rounded-md hover:font-medium flex items-center gap-1'>
+                        < CiShoppingTag />
+                        {tag}
+                    </p>
 
                     <p>
                         {commentCount ? `${commentCount} comments` :

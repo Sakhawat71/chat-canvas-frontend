@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { GridLoader } from "react-spinners";
 import Pagination from "../../../components/Pagination/Pagination";
 import usePostByTag from "../../../hooks/usePostByTag";
+import { AiOutlineTags } from "react-icons/ai";
 
 const Posts = ({ searchText }) => {
 
@@ -71,7 +72,7 @@ const Posts = ({ searchText }) => {
                 <div className="w-3/4">
 
                     <div className="py-2 px-4 border-2 rounded-lg justify-between bg-[#CBFFE9] flex items-center">
-                        <h2 className=" font-semibold text-2xl">All Posts : {postCount}</h2>
+                        <h2 className=" font-semibold text-2xl">{postCount} Posts</h2>
 
                         <AwesomeButton
                             href="/dashboard/add-post"
@@ -142,7 +143,10 @@ const Posts = ({ searchText }) => {
                 {/* tag and announceMent section */}
                 <div className="w-1/4 rounded-2xl top-10">
 
-                    <h3 className="text-black font-semibold text-center text-xl border-b py-3 bg-[#cbffe9] border-[#44B584]">Related Tags</h3>
+                    <h3 className="text-black font-semibold text-center text-xl border-b py-3 bg-[#cbffe9] border-[#44B584] flex items-center gap-2 justify-center">
+                        < AiOutlineTags />
+                        Related Tags
+                    </h3>
 
                     <TabList className='cursor-pointer flex p-4 flex-wrap space-x-2 border '>
                         <Tab className='hover:bg-lime-200 p-1 rounded-lg'>All Posts</Tab>

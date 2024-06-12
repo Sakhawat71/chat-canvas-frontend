@@ -1,5 +1,6 @@
 import { MdNotificationsActive } from "react-icons/md";
 import useAnnounce from "../../../hooks/useAnnounce";
+import { GrAnnounce } from "react-icons/gr";
 
 const Announcement = () => {
 
@@ -14,7 +15,8 @@ const Announcement = () => {
     return (
         <div>
             <hr className="my-2 border-2" />
-            <h1 className="text-canvasThem text-2xl flex items-center justify-center my-2">
+            <h1 className="text-canvasThem text-2xl flex items-center justify-center my-2 gap-1">
+                < GrAnnounce />
                 Announcement
                 <MdNotificationsActive className="animate-ping items-center ml-2" />
             </h1>
