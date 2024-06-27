@@ -4,7 +4,7 @@ import { CiShoppingTag } from "react-icons/ci";
 import { FacebookIcon, FacebookShareButton, LinkedinIcon, LinkedinShareButton, TwitterIcon, TwitterShareButton, WhatsappIcon, WhatsappShareButton } from "react-share";
 import CommentSection from "../../../../components/CommentSection/CommentSection";
 
-const hostUrl = import.meta.env.VITE_HOST_SITE;
+const hostUrl = import.meta.env.VITE_Local_host;
 const PostDetails = () => {
 
 

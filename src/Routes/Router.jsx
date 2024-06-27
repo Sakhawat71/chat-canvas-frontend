@@ -26,7 +26,7 @@ const router = createBrowserRouter([
             {
                 path: '/',
                 element: <HomeLayout></HomeLayout>,
-                loader: () => fetch(`${import.meta.env.VITE_HOST_SITE}/api/v1/post-count`)
+                loader: () => fetch(`${import.meta.env.VITE_Local_host}/api/v1/post-count`)
             },
             {
                 path: "/membership",
@@ -35,7 +35,7 @@ const router = createBrowserRouter([
             {
                 path: `/post-details/:id`,
                 element: <PostDetails></PostDetails>,
-                loader: ({ params }) => fetch(`${import.meta.env.VITE_HOST_SITE}/api/v1/post-details/${params.id}`)
+                loader: ({ params }) => fetch(`${import.meta.env.VITE_Local_host}/api/v1/post-details/${params.id}`)
             }
         ]
     },
@@ -75,17 +75,17 @@ const router = createBrowserRouter([
             },
             {
                 path: 'manage-users',
-                element: <AdminRoute> <ManageUsers /> </AdminRoute> 
+                element: <AdminRoute> <ManageUsers /> </AdminRoute>
             },
             {
                 path: 'reported-comments',
-                element: <AdminRoute> <ReportedComments /> </AdminRoute> 
+                element: <AdminRoute> <ReportedComments /> </AdminRoute>
             },
             {
                 path: 'make-announcement',
-                element: <AdminRoute> <MakeAnnounce /> </AdminRoute> 
+                element: <AdminRoute> <MakeAnnounce /> </AdminRoute>
             },
-            
+
         ]
     }
 ])

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosSecure = axios.create({
-    baseURL: import.meta.env.VITE_HOST_SITE,
+    baseURL: import.meta.env.VITE_Local_host,
     withCredentials: true,
 })
 
