@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import toast from 'react-hot-toast';
+import Swal from 'sweetalert2';
 
 const PostTable = ({ post, refetch }) => {
 
@@ -8,13 +9,26 @@ const PostTable = ({ post, refetch }) => {
 
     const handelDelete = async (id) => {
 
-        console.log(id);
-        const res = await axiosSecure.delete(`/api/v1/delete-post/${id}`)
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
 
-        if(res.data.deletedCount){
-            toast.success('Post Deleted Successfully!')
-            refetch()
-        }
+                const res = await axiosSecure.delete(`/api/v1/delete-post/${id}`)
+                if (res.data.deletedCount) {
+                    toast.success('Post Deleted Successfully!')
+                    refetch()
+                }
+            }
+        });
+
+
     }
 
     return (
@@ -42,7 +56,7 @@ const PostTable = ({ post, refetch }) => {
 
 PostTable.propTypes = {
     post: PropTypes.object.isRequired,
-    refetch : PropTypes.any,
+    refetch: PropTypes.any,
 };
 
 export default PostTable;
