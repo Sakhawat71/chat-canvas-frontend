@@ -1,6 +1,7 @@
 import toast from "react-hot-toast";
 import useAllUsers from "../../../../hooks/useAllUsers";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const ManageUsers = () => {
 
@@ -8,12 +9,23 @@ const ManageUsers = () => {
     const axiosSecure = useAxiosSecure();
 
     const hendelMakeAdmin = async (id) => {
-        const res = await axiosSecure.patch(`api/v1/make-admin/${id}`)
-
-        if (res.data.modifiedCount) {
-            toast.success('User promoted to admin successfully');
-            refetch()
-        }
+        Swal.fire({
+            title: "Are you sure?",
+            text: "This user will be promoted to admin !",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Make Admin!"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                const res = await axiosSecure.patch(`api/v1/make-admin/${id}`)
+                if (res.data.modifiedCount) {
+                    toast.success('User promoted to admin successfully');
+                    refetch()
+                }
+            }
+        });
     }
 
     return (

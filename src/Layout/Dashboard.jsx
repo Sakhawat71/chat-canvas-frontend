@@ -105,7 +105,7 @@ const Dashboard = () => {
     return (
         <div className="flex gap-10 container mx-auto ">
 
-            <div className="w-3/12 h-screen pt-10 bg-slate-50 shadow-2xl rounded-2xl font-roboto">
+            <div className="w-3/12 pt-10 bg-slate-50 shadow-2xl rounded-2xl font-roboto ">
                 <Link to="/">
                     <figure className=" mx-auto text-center">
                         <img
