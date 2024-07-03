@@ -5,7 +5,7 @@ const useComments = (postId) => {
 
     const axiosPublic = useAxiosPublic();
 
-    const { data: comments = [], refetch } = useQuery({
+    const { data: comments = [], refetch ,isLoading} = useQuery({
 
         queryKey: ['comments', postId],
         queryFn: async () => {
@@ -14,7 +14,7 @@ const useComments = (postId) => {
         }
     })
 
-    return [comments, refetch];
+    return [comments, refetch,isLoading];
 };
 
 export default useComments;

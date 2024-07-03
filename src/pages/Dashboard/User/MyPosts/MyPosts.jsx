@@ -3,7 +3,7 @@ import useMyPosts from "../../../../hooks/useMyPosts";
 
 const MyPosts = () => {
 
-    const [postData , ,refetch] = useMyPosts()
+    const [postData, , refetch] = useMyPosts()
     const { postCount, posts } = postData;
 
     return (

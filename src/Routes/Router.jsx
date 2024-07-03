@@ -16,6 +16,7 @@ import ManageUsers from "../pages/Dashboard/Admin/ManageUsers/ManageUsers";
 import AdminProfile from "../pages/Dashboard/Admin/AdminProfile/AdminProfile";
 import ReportedComments from "../pages/Dashboard/Admin/ReportedComments/ReportedComments";
 import MakeAnnounce from "../pages/Dashboard/Admin/MakeAnnounce/MakeAnnounce";
+import CommentsForPost from "../pages/Dashboard/User/CommentsForPost/CommentsForPost";
 
 const router = createBrowserRouter([
     {
@@ -66,7 +67,12 @@ const router = createBrowserRouter([
                 path: "my-posts",
                 element: <MyPosts />
             },
-
+            {
+                path: "comments/:postId",
+                element: <CommentsForPost />,
+                // loader: ({params}) => 
+            },
+            
 
             // Admin route
             {
