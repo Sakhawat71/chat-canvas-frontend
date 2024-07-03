@@ -103,7 +103,7 @@ const Dashboard = () => {
     }
 
     return (
-        <div className="flex gap-10 container mx-auto ">
+        <div className="flex gap-10 container mx-auto min-h-screen">
 
             <div className="w-3/12 pt-10 bg-slate-50 shadow-2xl rounded-2xl font-roboto ">
                 <Link to="/">
