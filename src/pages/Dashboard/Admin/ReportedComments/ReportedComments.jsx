@@ -1,6 +1,7 @@
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import useReportedComments from "../../../../hooks/useReportedComments";
+import { HashLoader } from "react-spinners";
 
 const ReportedComments = () => {
 
@@ -27,7 +28,7 @@ const ReportedComments = () => {
     }
 
     if (isLoading) {
-        return <div>loading..................</div>
+        return <HashLoader />
     }
 
     return (
