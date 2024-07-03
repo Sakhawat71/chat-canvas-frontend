@@ -3,32 +3,44 @@ import useComments from "../../../../hooks/useComments";
 import { HashLoader } from "react-spinners";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import useAuth from "../../../../hooks/useAuth";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
 const CommentsForPost = () => {
 
-    const { postId } = useParams()
+    const { postId } = useParams();
+    const user = useAuth()
     const [comments, , isLoading] = useComments(postId);
     const [reportValues, setReportValues] = useState({});
+    const axiosSecure = useAxiosSecure()
 
     const handleSelect = (e, commentId) => {
         const selectValue = e.target.value;
         setReportValues(prev => ({ ...prev, [commentId]: selectValue }));
     }
 
-    const handleSubmitReport = (commentId) => {
+    const handleSubmitReport = async (commentId, postId, commenterEmail) => {
 
         const reportValue = reportValues[commentId];
-        const comment = {
-            reportValue,
+
+        const reportedComment = {
             commentId,
+            postId,
+            report: reportValue,
+            reporterEmail: user.email,
+            commenterEmail,
+            reportedAt: new Date
 
         }
 
-        console.log(comment);
+        // console.log(reportedComment);
 
-        if (reportValue) {
-            toast.success(`Comment ${commentId} reported as ${reportValue}`);
-            // Add your report submission logic here
+        if (reportedComment) {
+            const res = await axiosSecure.post('/api/v1/send-report', reportedComment)
+            if (res.data.insertedId) {
+                toast.success(`Comment ${commentId} reported as ${reportValue}`);
+            }
+            console.log(res.data);
         }
     }
 
@@ -42,7 +54,7 @@ const CommentsForPost = () => {
 
     return (
         <div>
-            
+
             <div className="container mx-auto p-4">
                 <div className="bg-white p-6 rounded-lg shadow-md text-center">
                     {comments.length > 0 ? (
@@ -112,7 +124,7 @@ const CommentsForPost = () => {
                                     <button
                                         className='btn btn-xs disabled'
                                         disabled={!reportValues[comment._id]}
-                                        onClick={() => handleSubmitReport(comment._id)}
+                                        onClick={() => handleSubmitReport(comment._id, comment?.postId, comment?.author?.email)}
 
                                     >
                                         Report
