@@ -19,12 +19,13 @@ const CommentsForPost = () => {
         setReportValues(prev => ({ ...prev, [commentId]: selectValue }));
     }
 
-    const handleSubmitReport = async (commentId, postId, commenterEmail) => {
+    const handleSubmitReport = async (commentId, postId, commenterEmail,commentText) => {
 
         const reportValue = reportValues[commentId];
 
         const reportedComment = {
             commentId,
+            commentText,
             postId,
             report: reportValue,
             reporterEmail: user.email,
@@ -33,19 +34,17 @@ const CommentsForPost = () => {
 
         }
 
-        // console.log(reportedComment);
 
         if (reportedComment) {
             const res = await axiosSecure.post('/api/v1/send-report', reportedComment)
             if (res.data.insertedId) {
                 toast.success(`Comment ${commentId} reported as ${reportValue}`);
             }
-            console.log(res.data);
+            if(res.data.acknowledged === false){
+                toast.error(res.data.message)
+            }
         }
     }
-
-
-
 
 
     if (isLoading) {
@@ -54,7 +53,6 @@ const CommentsForPost = () => {
 
     return (
         <div>
-
             <div className="container mx-auto p-4">
                 <div className="bg-white p-6 rounded-lg shadow-md text-center">
                     {comments.length > 0 ? (
@@ -92,7 +90,9 @@ const CommentsForPost = () => {
                                         <>
                                             ...
                                             <label htmlFor={`modal_${comment._id}`} className="btn btn-xs p-0 px-1">read more</label>
+
                                             <input type="checkbox" id={`modal_${comment._id}`} className="modal-toggle" />
+
                                             <div className="modal" role="dialog">
                                                 <div className="modal-box">
                                                     <h3 className="text-lg font-bold text-gray-500">
@@ -124,7 +124,7 @@ const CommentsForPost = () => {
                                     <button
                                         className='btn btn-xs disabled'
                                         disabled={!reportValues[comment._id]}
-                                        onClick={() => handleSubmitReport(comment._id, comment?.postId, comment?.author?.email)}
+                                        onClick={() => handleSubmitReport(comment._id, comment?.postId, comment?.author?.email , comment?.content)}
 
                                     >
                                         Report
