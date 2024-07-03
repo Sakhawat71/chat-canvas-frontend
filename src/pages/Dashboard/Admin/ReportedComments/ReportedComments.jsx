@@ -15,10 +15,10 @@ const ReportedComments = () => {
         }
     }
 
-    const hendelDeleteComment = async (commentId,reportId) => {
+    const hendelDeleteComment = async (commentId, reportId) => {
 
         const res = await axiosSecure.delete(`/api/v1/delete-comment/${commentId}`)
-        if(res.data.deletedCount){
+        if (res.data.deletedCount) {
 
             hendelDeleteReport(reportId)
             toast.success('Comment Deleted!')
@@ -32,7 +32,24 @@ const ReportedComments = () => {
 
     return (
 
-        <div className="p-10 ">
+        <div className="px-10 ">
+
+
+            <div className="container mx-auto p-4">
+                <div className="bg-gray-100 p-6 rounded-lg shadow-md text-center text-white">
+                    {reportedComments.length > 0 ? (
+                        <div className="text-lg font-semibold">
+                            <p className="text-red-500">There are {reportedComments.length} Reported Comments</p>
+                        </div>
+                    ) : (
+                        <div className="text-lg font-semibold">
+                            <p className="text-red-600">There are no Reported comments.</p>
+                        </div>
+                    )}
+                </div>
+            </div>
+
+
 
             <table className="table">
                 {/* head */}
@@ -41,7 +58,7 @@ const ReportedComments = () => {
                         <th>Comment Text</th>
                         <th>Details</th>
                         <th>Report</th>
-                        {/* <th>Status</th> */} 
+                        {/* <th>Status</th> */}
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -85,7 +102,7 @@ const ReportedComments = () => {
                             </td>
 
                             <td> {comment.report} </td>
-                            
+
                             {/* <td>status</td> */}
 
                             <td>
@@ -106,7 +123,7 @@ const ReportedComments = () => {
 
                                         <li>
                                             <button
-                                                onClick={() => hendelDeleteComment(comment.commentId,comment._id)}
+                                                onClick={() => hendelDeleteComment(comment.commentId, comment._id)}
                                                 className="btn"
                                             >
                                                 Delete Comment

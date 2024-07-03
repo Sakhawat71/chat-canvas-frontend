@@ -13,8 +13,6 @@ const CommentSection = ({ postId }) => {
     const [comments,refetch] = useComments(postId);
     const axiosSecure = useAxiosSecure()
 
-    console.log("comments", comments);
-
     const author = {
         name: user?.displayName,
         email: user?.email
